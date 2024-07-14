@@ -61,7 +61,7 @@ export default function SideBar({ visible, handleVisible }) {
                 </svg>*/}
                     <Image src="/logo.enc" alt="Logo" width={55} height={55} />
                     <span className="font-semibold text-2xl text-primary">
-                      Growing up
+                      growing-up
                     </span>
                   </span>
                   <span>
@@ -97,9 +97,9 @@ export default function SideBar({ visible, handleVisible }) {
                         </div>
                       </StyleClass>
                       <ul className="list-none p-0 m-0 overflow-hidden">
-                        <ItemSB icon={"pi-home"} text={"Inicio"} />
-                        <ItemSB icon={"pi-list"} text={"Mi portafolio"} />
-                        <ItemSB icon={"pi-history"} text={"Historial"} />
+                        <ItemSB icon={"pi-home"} text={"Inicio"} link={"inicio"} />
+                        <ItemSB icon={"pi-list"} text={"Mi portafolio"} link={"portafolio"}/>
+                        <ItemSB icon={"pi-history"} text={"Historial"} link={"historial"}/>
                         {/*<li>
                           <StyleClass
                             nodeRef={btnRef2}
@@ -178,8 +178,8 @@ export default function SideBar({ visible, handleVisible }) {
                         </div>
                       </StyleClass>
                       <ul className="list-none p-0 m-0 overflow-hidden">
-                        <ItemSB icon={"pi-folder"} text={"Proyectos"} />
-                        <ItemSB icon={"pi-money-bill"} text={"Ingresos"} />
+                        <ItemSB icon={"pi-folder"} text={"Proyectos"} link={"proyectos"}/>
+                        <ItemSB icon={"pi-money-bill"} text={"Ingresos"} link={"wallet"} />
                         {/*<ItemSB icon={"pi-cog"} text={"Settings"} />*/}
                       </ul>
                     </li>
