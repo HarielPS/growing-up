@@ -1,7 +1,6 @@
-"use client"
+"use client";
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
+import Image from 'next/image';
 
 const logoStyle = {
   width: '140px',
@@ -20,7 +20,7 @@ const logoStyle = {
   cursor: 'pointer',
 };
 
-function AppAppBar({ mode, toggleColorMode }) {
+function AppAppBar() {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -28,10 +28,10 @@ function AppAppBar({ mode, toggleColorMode }) {
   };
 
   const handleregistrate = () => {
-    window.location.href = "/signup";
+    window.location.href = "/registro";
   }
 
-  const handleentra= () => {
+  const handleentra = () => {
     window.location.href = "/login";
   }
 
@@ -92,8 +92,10 @@ function AppAppBar({ mode, toggleColorMode }) {
                 px: 0,
               }}
             >
-              <img
-                src= "/logo.png" 
+              <Image
+                width={500}
+                height={300}
+                src="/logo.png"
                 style={logoStyle}
                 alt="logo of sitemark"
               />
@@ -122,14 +124,6 @@ function AppAppBar({ mode, toggleColorMode }) {
                     Datos
                   </Typography>
                 </MenuItem>
-                {/* <MenuItem
-                  onClick={() => scrollToSection('pricing')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Pricing
-                  </Typography>
-                </MenuItem> */}
                 <MenuItem
                   onClick={() => scrollToSection('faq')}
                   sx={{ py: '6px', px: '12px' }}
@@ -147,7 +141,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 alignItems: 'center',
               }}
             >
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+              <ToggleColorMode />
               <Button
                 color="primary"
                 variant="text"
@@ -198,7 +192,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                       flexGrow: 1,
                     }}
                   >
-                    <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+                    <ToggleColorMode />
                   </Box>
                   <MenuItem onClick={() => scrollToSection('features')}>
                     Ventajas
@@ -209,9 +203,6 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <MenuItem onClick={() => scrollToSection('highlights')}>
                     Datos
                   </MenuItem>
-                  {/* <MenuItem onClick={() => scrollToSection('pricing')}>
-                    Pricing
-                  </MenuItem> */}
                   <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>
                   <Divider />
                   <MenuItem>
@@ -236,7 +227,6 @@ function AppAppBar({ mode, toggleColorMode }) {
                       target="_blank"
                       sx={{ width: '100%' }}
                       onClick={handleentra}
-
                     >
                       Entrar
                     </Button>
@@ -250,10 +240,5 @@ function AppAppBar({ mode, toggleColorMode }) {
     </div>
   );
 }
-
-AppAppBar.propTypes = {
-  mode: PropTypes.oneOf(['dark', 'light']).isRequired,
-  toggleColorMode: PropTypes.func.isRequired,
-};
 
 export default AppAppBar;

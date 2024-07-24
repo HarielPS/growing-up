@@ -9,46 +9,47 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import { useTheme } from '@mui/system';
+import { height, useTheme } from '@mui/system';
+import Image from 'next/image';
 
 const userTestimonials = [
   {
-    avatar: <Avatar alt="Carlos M." src="/static/images/avatar/1.jpg" />,
+    avatar: <Avatar alt="Carlos M." />,
     name: 'Carlos M.',
     occupation: 'Emprendedor',
     testimonial:
     "Gracias a DebtConnect, pude adelantar el pago de mis facturas en cuestión de horas. Esto me permitió mantener mi negocio en funcionamiento sin problemas y aprovechar oportunidades de crecimiento. La plataforma es intuitiva y segura, lo que me da total confianza en su uso.",
   },
   {
-    avatar: <Avatar alt="Laura G." src="/static/images/avatar/2.jpg" />,
+    avatar: <Avatar alt="Laura G." />,
     name: 'Laura G.',
     occupation: 'Directora Financiera',
     testimonial:
     "DebtConnect ha sido un cambio total para nuestra gestión financiera. El proceso completamente digital y las condiciones justas nos han permitido obtener financiamiento rápido sin complicaciones. Además, las tasas de interés son muy competitivas.",
   },
   {
-    avatar: <Avatar alt="Ricardo S." src="/static/images/avatar/3.jpg" />,
+    avatar: <Avatar alt="Ricardo S."/>,
     name: 'Ricardo S.',
     occupation: 'Inversionista',
     testimonial:
     "Invertir a través de DebtConnect ha sido una excelente decisión. No solo estoy obteniendo ganancias mensuales consistentes, sino que también estoy apoyando a empresas que realmente necesitan financiamiento. La transparencia y seguridad de las transacciones me han dado una gran tranquilidad.",
   },
   {
-    avatar: <Avatar alt="Ana T." src="/static/images/avatar/4.jpg" />,
+    avatar: <Avatar alt="Ana T."/>,
     name: 'Ana T.',
     occupation: 'Propietaria de una PYME',
     testimonial:
     "La posibilidad de adelantar pagos y gestionar deudas sin papeleo ha simplificado enormemente nuestra operación diaria. DebtConnect nos ha proporcionado una solución flexible y eficiente, mejorando nuestro flujo de efectivo y permitiéndonos enfocarnos en el crecimiento del negocio.",
   },
   {
-    avatar: <Avatar alt="Miguel P." src="/static/images/avatar/5.jpg" />,
+    avatar: <Avatar alt="Miguel P."/>,
     name: 'Miguel P.',
     occupation: 'Gerente de Ventas',
     testimonial:
     "DebtConnect nos ha permitido mantener relaciones sólidas con nuestros proveedores, gracias a la rapidez con la que podemos pagar nuestras facturas. La plataforma es fácil de usar y ha mejorado significativamente nuestra liquidez.",
   },
   {
-    avatar: <Avatar alt="María L." src="/static/images/avatar/6.jpg" />,
+    avatar: <Avatar alt="María L."/>,
     name: 'María L.',
     occupation: 'Dueña de un Restaurante',
     testimonial:
@@ -77,6 +78,7 @@ const darkLogos = [
 const logoStyle = {
   width: '64px',
   opacity: 0.3,
+  height:'auto',
 };
 
 export default function Testimonials() {
@@ -141,7 +143,9 @@ export default function Testimonials() {
                   title={testimonial.name}
                   subheader={testimonial.occupation}
                 />
-                <img
+                <Image
+                  width={500}
+                  height={300}
                   src={logos[index]}
                   alt={`Logo ${index + 1}`}
                   style={logoStyle}

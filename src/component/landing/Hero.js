@@ -152,8 +152,8 @@ export default function Hero() {
             justifyContent: 'center',
             bgcolor: 'transparent',
           }}
-          nextButtonProps={{ onClick: handleNext }}
-          backButtonProps={{ onClick: handleBack }}
+          nextbuttonprops={{ onClick: handleNext }}
+          backbuttonprops={{ onClick: handleBack }}
           onChange={handleStepChange}
         />
       </Container>
