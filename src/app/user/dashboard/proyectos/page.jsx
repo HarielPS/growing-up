@@ -1,76 +1,105 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import CardFinance from '@/components/card/Card';
-import { Box } from '@mui/system';
+import { Box, Button, Typography } from '@mui/material';
 import { db } from '../../../../../firebase'; // Adjust import path if necessary
+import { formatDistanceToNow } from 'date-fns';
+
+const ITEMS_PER_PAGE = 3;
 
 export default function Page() {
-  const [projectData, setProjectData] = useState(null);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchProjects = async (page) => {
+    setLoading(true);
+    const offset = (page - 1) * ITEMS_PER_PAGE;
+    try {
+      const querySnapshot = await db.collection('proyecto')
+        .orderBy('fecha_solicitud')
+        .startAt(offset)
+        .limit(ITEMS_PER_PAGE)
+        .get();
+      
+      const totalCount = await db.collection('proyecto').get().then(snapshot => snapshot.size);
+      setTotalPages(Math.ceil(totalCount / ITEMS_PER_PAGE));
+
+      const projectPromises = querySnapshot.docs.map(async (doc) => {
+        let data = doc.data();
+        if (data.empresa) {
+          const empresaDoc = await data.empresa.get();
+          if (empresaDoc.exists) {
+            data = {
+              ...data,
+              imagen_solicitud: empresaDoc.data().logo,
+              empresa: empresaDoc.data().nombre,
+            };
+          }
+        }
+        if (data.categoria && Array.isArray(data.categoria)) {
+          const categoryNames = await Promise.all(data.categoria.map(async (catRef) => {
+            const catDoc = await catRef.get();
+            return catDoc.exists ? catDoc.data().nombre : "Unknown";
+          }));
+          data = { ...data, categoria: categoryNames };
+        }
+        const fechaSolicitudDate = data.fecha_solicitud.toDate();
+        data.timeAgo = formatDistanceToNow(fechaSolicitudDate, { addSuffix: true });
+        return data;
+      });
+
+      const projectData = await Promise.all(projectPromises);
+      setProjects(projectData);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const doc = await db.collection('proyecto').doc('5N4YczgrBsGqkSa5QrXu').get();
-        if (doc.exists) {
-          let data = doc.data();
-          
-          // Fetch the image URL and name from the referenced empresa document
-          if (data.empresa) {
-            const empresaDoc = await data.empresa.get();
-            if (empresaDoc.exists) {
-              data = {
-                ...data,
-                imagen_solicitud: empresaDoc.data().logo,
-                empresa: empresaDoc.data().nombre,
-              };
-            }
-          }
+    console.log("se cargo el componente");
+    fetchProjects(currentPage);
+  }, [currentPage]);
 
-          // Fetch each category name from the referenced category documents
-          if (data.categoria && Array.isArray(data.categoria)) {
-            const categoryNames = await Promise.all(data.categoria.map(async (catRef) => {
-              const catDoc = await catRef.get();
-              return catDoc.exists ? catDoc.data().nombre : "Unknown";
-            }));
-            data = { ...data, categoria: categoryNames };
-          }
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
 
-          setProjectData(data);
-        }
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!projectData) {
-    return <div>No data found</div>;
-  }
-
   return (
     <Box>
       <h1>Clientes</h1>
-      <CardFinance 
-        imageSrc={projectData.imagen_solicitud}
-        projectTitle={projectData.titulo}
-        companyName={projectData.empresa}
-        completedProjects={projectData.estado_proyecto}
-        location={projectData.ubicacion}
-        duration="1 Mes"
-        amountRaised={projectData.monto_recaudado}
-        percentageRaised={((projectData.monto_recaudado / projectData.monto_pedido) * 100).toFixed(2)}
-        tokenYield={`${projectData.rendimiento} / token`}
-        tags={projectData.categoria}
-        description={projectData.descripcion}
-      />
+      {projects.map((project, index) => (
+        <CardFinance 
+          key={index}
+          imageSrc={project.imagen_solicitud}
+          projectTitle={project.titulo}
+          companyName={project.empresa}
+          completedProjects={project.estado_proyecto}
+          location={project.ubicacion}
+          duration={project.timeAgo} // Pass the calculated time ago
+          amountRaised={project.monto_recaudado}
+          percentageRaised={((project.monto_recaudado / project.monto_pedido) * 100).toFixed(2)}
+          tokenYield={`${project.rendimiento} / token`}
+          tags={project.categoria}
+          description={project.descripcion}
+        />
+      ))}
+      <Box display="flex" justifyContent="space-between" mt={2}>
+        <Button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</Button>
+        <Typography>Page {currentPage} of {totalPages}</Typography>
+        <Button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</Button>
+      </Box>
     </Box>
   );
 }
