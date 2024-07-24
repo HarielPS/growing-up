@@ -1,24 +1,24 @@
-"use client"
+"use client";
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-
 import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
 import ModeNightRoundedIcon from '@mui/icons-material/ModeNightRounded';
+import { useTheme } from '../../themes/ThemeContext'; // Asegúrate de que la ruta sea correcta
 
-function ToggleColorMode({ mode, toggleColorMode }) {
+function ToggleColorMode() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <Box sx={{ maxWidth: '32px' }}>
       <Button
         variant="text"
-        onClick={toggleColorMode}
+        onClick={toggleTheme}
         size="small"
         aria-label="button to toggle theme"
         sx={{ minWidth: '32px', height: '32px', p: '4px' }}
       >
-        {mode === 'dark' ? (
+        {theme.palette.mode === 'dark' ? (
           <WbSunnyRoundedIcon fontSize="small" />
         ) : (
           <ModeNightRoundedIcon fontSize="small" />
@@ -27,10 +27,5 @@ function ToggleColorMode({ mode, toggleColorMode }) {
     </Box>
   );
 }
-
-ToggleColorMode.propTypes = {
-  mode: PropTypes.oneOf(['dark', 'light']).isRequired,
-  toggleColorMode: PropTypes.func.isRequired,
-};
 
 export default ToggleColorMode;

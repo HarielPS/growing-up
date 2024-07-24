@@ -1,9 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
-import "primereact/resources/themes/saga-blue/theme.css"; // Importar un tema de PrimeReact
-import "primereact/resources/primereact.min.css"; // Importar estilos de PrimeReact
-import "primeicons/primeicons.css"; // Importar íconos de PrimeReact
 
 export default function ChartTest() {
     const [chartData, setChartData] = useState({});

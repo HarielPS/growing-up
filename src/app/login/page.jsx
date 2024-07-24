@@ -1,134 +1,155 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import FormLabel from '@mui/material/FormLabel';
-import { styled } from '@mui/system';
-import Grid from '@mui/material/Grid';
-import Web3 from 'web3';
-import { useLocalStorage } from 'primereact/hooks';
+import { Box, Typography, Stack, useTheme, Button } from '@mui/material';
+import NavigationIcon from '@mui/icons-material/Navigation';
+import WalletConnect from '@/component/web3/wallet/WalletConnect';
+import ThemeToggle from "../ThemeToggle";
 import { db } from '../../../firebase';
-import { findUserIdByWalletAddress } from '@/component/serchFirebase';
+import { doc, getDoc, collection } from 'firebase/firestore';
+import comprobarCuenta from '@/component/searchBD/comprobarcuenta';
+import WalletDisconnect, { clearLocalStorage } from '@/component/web3/wallet/WalletDisconnect';
+import PasswordModal from './password/modal';
 
-const FormGrid = styled(Grid)(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-}));
+const Registro = () => {
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
+  const [userId, setUserId] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
 
-export default function Login() {
-  const [userId, setUserId] = useLocalStorage('userId', '');
-  const [formValues, setFormValues] = useState({
-    confirmPassword: '',
-  });
-  const [formErrors, setFormErrors] = useState({});
-
-  const validateForm = () => {
-    const errors = {};
-    if (!formValues.confirmPassword) {
-      errors.confirmPassword = 'La contraseña es requerida';
-    }
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
-  }
-
-  const connectMetamask = async () => {
+  const handleWalletConnected = async (walletName, walletAddress) => {
     try {
-      if (typeof window.ethereum !== 'undefined') {
-        const web3 = new Web3(window.ethereum);
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const accounts = await web3.eth.getAccounts();
-        const walletAddress = accounts[0];
+      console.log('Wallet Connected:', { walletName, walletAddress });
+      const result = await comprobarCuenta();
+
+      if (result) {
+        console.log('Wallet found');
+        const userId = localStorage.getItem('userId');
+
+        console.log(`Se encontro wallet en ${userId}`);
+        console.log(`Wallet ${walletName} with address ${walletAddress}.`);
         
-        const existingUser = await findUserIdByWalletAddress(walletAddress);
-  
-        if (existingUser) {
-          const docSnapshot = await db.collection('usuarios').doc(existingUser).get();
-          const userData = docSnapshot.data();
-          const storedPassword = userData.password;
-          
-          if (storedPassword === formValues.confirmPassword) {
-            setUserId(existingUser);
-            window.location.href = "/user/dashboard/inicio";
-          } else {
-            alert("La contraseña no coincide");
-            if (window.ethereum && window.ethereum.disconnect) {
-              await window.ethereum.disconnect();
-            }
-          }
-        } else {
-          alert("No se encontró ninguna cuenta asociada a esta billetera.");
-          if (window.ethereum && window.ethereum.disconnect) {
-            await window.ethereum.disconnect();
-          }
-        }
+        setModalOpen(true); // Open the password modal
       } else {
-        console.error("MetaMask extension is not installed.");
+        alert('Usuario no registrado');
+        clearLocalStorage();
+        console.log('Usuario no registrado');
       }
     } catch (error) {
-      console.error("Error connecting to MetaMask", error);
+      console.error('Error saving wallet to Firebase:', error);
     }
   };
-  
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
+
+  const handlePasswordSubmit = async (password) => {
+    console.log('Password submitted:', password);  // Log the password submission
+    try {
+      const userId = localStorage.getItem('userId');
+      const userDocRef = doc(db, 'inversor', userId);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        if (userData.password === password) {
+          console.log('Password is correct');  // Log correct password
+          window.location.href = '/user/dashboard/inicio';
+        } else {
+          console.log('Invalid password');  // Log invalid password
+          setPasswordError('Invalid password');
+        }
+      } else {
+        console.log('User not found');  // Log user not found
+        setPasswordError('User not found');
+      }
+    } catch (error) {
+      console.error('Error verifying password:', error);
+      setPasswordError('Error verifying password');
+    }
   };
 
   return (
     <Box
       sx={{
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
-        bgcolor: 'background.default',
+        bgcolor: isDarkMode ? 'background.default' : '#f0f4f8',
+        overflow: 'hidden',
+        padding: 2,
+        boxSizing: 'border-box',
       }}
     >
-      <List
-        dense
+      <Stack
+        direction="row"
+        spacing={2}
         sx={{
-          width: '100%',
-          maxWidth: 360,
-          bgcolor: 'background.paper',
-          boxShadow: 3,
-          borderRadius: 2,
-          p: 3,
+          position: 'absolute',
+          top: 16,
+          left: 16
         }}
       >
-        <ListItem disablePadding sx={{ mb: 2 }}>
-          <ListItemButton onClick={connectMetamask}>
-            <ListItemAvatar>
-              <Avatar
-                alt={`Metamask`}
-                src={`https://smn.duckie.land/uploads/news/20220810234604-2022-08-10news234323.jpg`}
-              />
-            </ListItemAvatar>
-            <ListItemText primary={`Metamask`} />
-          </ListItemButton>
-        </ListItem>
-
-        <FormGrid item xs={6}>
-          <FormLabel htmlFor="confirmPassword" required>
-            Confirmar contraseña
-          </FormLabel>
-          <OutlinedInput
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            placeholder="12345"
-            required
-            value={formValues.confirmPassword}
-            onChange={handleInputChange}
-          />
-          {formErrors.confirmPassword && <span style={{ color: 'red' }}>{formErrors.confirmPassword}</span>}
-        </FormGrid>
-      </List>
+        <Button
+          variant="extended"
+          onClick={() => window.location.href = '/'}
+          sx={{
+            boxShadow: isDarkMode
+              ? '0px 3px 5px -1px rgba(255, 255, 255, 0.2), 0px 6px 10px 0px rgba(255, 255, 255, 0.14), 0px 1px 18px 0px rgba(255, 255, 255, 0.12)'
+              : '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
+          }}
+        >
+          <NavigationIcon sx={{ mr: 1, transform: 'rotate(-90deg)' }} />
+          Atras
+        </Button>
+      </Stack>
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{
+          position: 'absolute',
+          top: 16,
+          right: 16
+        }}
+      >
+        <ThemeToggle />
+      </Stack>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{
+          mb: 4,
+          textAlign: 'center',
+          color: isDarkMode ? theme.palette.text.primary : '#333'
+        }}
+      >
+        Iniciar Sesion
+      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '90%',
+          maxWidth: '800px',
+          bgcolor: 'background.paper',
+          boxShadow: isDarkMode
+            ? '0px 3px 5px -1px rgba(255, 255, 255, 0.2), 0px 6px 10px 0px rgba(255, 255, 255, 0.14), 0px 1px 18px 0px rgba(255, 255, 255, 0.12)'
+            : '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
+          borderRadius: 2,
+          padding: 4,
+          textAlign: 'center',
+        }}
+      >
+        <WalletConnect onWalletConnected={handleWalletConnected} />
+      </Box>
+      <PasswordModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={handlePasswordSubmit}
+        error={passwordError}  // Pass the passwordError as the error prop
+      />
     </Box>
   );
-}
+};
+
+export default Registro;
