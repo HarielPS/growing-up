@@ -1,76 +1,107 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import CardFinance from '@/components/card/Card';
-import { Box } from '@mui/system';
+import { Box, Typography, Pagination } from '@mui/material';
 import { db } from '../../../../../firebase'; // Adjust import path if necessary
+import { formatDistanceToNow } from 'date-fns';
+import Loading from '@/components/loading/loading';
+
+const ITEMS_PER_PAGE = 5;
 
 export default function Page() {
-  const [projectData, setProjectData] = useState(null);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchProjects = async (page) => {
+    setLoading(true);
+    const offset = (page - 1) * ITEMS_PER_PAGE;
+    try {
+      const querySnapshot = await db.collection('proyecto')
+        .orderBy('fecha_solicitud')
+        .startAt(offset)
+        .limit(ITEMS_PER_PAGE)
+        .get();
+      
+      const totalCount = await db.collection('proyecto').get().then(snapshot => snapshot.size);
+      setTotalPages(Math.ceil(totalCount / ITEMS_PER_PAGE));
+
+      const projectPromises = querySnapshot.docs.map(async (doc) => {
+        let data = doc.data();
+        if (data.empresa) {
+          const empresaDoc = await data.empresa.get();
+          if (empresaDoc.exists) {
+            data = {
+              ...data,
+              imagen_solicitud: empresaDoc.data().logo,
+              empresa: empresaDoc.data().nombre,
+            };
+          }
+        }
+        if (data.categoria && Array.isArray(data.categoria)) {
+          const categoryNames = await Promise.all(data.categoria.map(async (catRef) => {
+            const catDoc = await catRef.get();
+            return catDoc.exists ? catDoc.data().nombre : "Unknown";
+          }));
+          data = { ...data, categoria: categoryNames };
+        }
+        const fechaSolicitudDate = data.fecha_solicitud.toDate();
+        data.timeAgo = formatDistanceToNow(fechaSolicitudDate, { addSuffix: true });
+        return data;
+      });
+
+      const projectData = await Promise.all(projectPromises);
+      setProjects(projectData);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const doc = await db.collection('proyecto').doc('5N4YczgrBsGqkSa5QrXu').get();
-        if (doc.exists) {
-          let data = doc.data();
-          
-          // Fetch the image URL and name from the referenced empresa document
-          if (data.empresa) {
-            const empresaDoc = await data.empresa.get();
-            if (empresaDoc.exists) {
-              data = {
-                ...data,
-                imagen_solicitud: empresaDoc.data().logo,
-                empresa: empresaDoc.data().nombre,
-              };
-            }
-          }
+    console.log("se cargo el componente");
+    fetchProjects(currentPage);
+  }, [currentPage]);
 
-          // Fetch each category name from the referenced category documents
-          if (data.categoria && Array.isArray(data.categoria)) {
-            const categoryNames = await Promise.all(data.categoria.map(async (catRef) => {
-              const catDoc = await catRef.get();
-              return catDoc.exists ? catDoc.data().nombre : "Unknown";
-            }));
-            data = { ...data, categoria: categoryNames };
-          }
-
-          setProjectData(data);
-        }
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
   if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!projectData) {
-    return <div>No data found</div>;
+    return <Loading/>;
   }
 
   return (
     <Box>
       <h1>Clientes</h1>
-      <CardFinance 
-        imageSrc={projectData.imagen_solicitud}
-        projectTitle={projectData.titulo}
-        companyName={projectData.empresa}
-        completedProjects={projectData.estado_proyecto}
-        location={projectData.ubicacion}
-        duration="1 Mes"
-        amountRaised={projectData.monto_recaudado}
-        percentageRaised={((projectData.monto_recaudado / projectData.monto_pedido) * 100).toFixed(2)}
-        tokenYield={`${projectData.rendimiento} / token`}
-        tags={projectData.categoria}
-        description={projectData.descripcion}
-      />
+      {projects.map((project, index) => (
+        <Box key={index} sx={{ paddingY: '3vh' }}>
+          <CardFinance
+            imageSrc={project.imagen_solicitud}
+            projectTitle={project.titulo}
+            companyName={project.empresa}
+            completedProjects={project.estado_proyecto}
+            location={project.ubicacion}
+            duration={project.timeAgo}
+            amountRaised={project.monto_recaudado}
+            percentageRaised={((project.monto_recaudado / project.monto_pedido) * 100).toFixed(2)}
+            tokenYield={`${project.rendimiento} / token`}
+            tags={project.categoria}
+            description={project.descripcion}
+          />
+        </Box>
+      ))}
+      <Box display="flex" justifyContent="center" mt={2}>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          variant="outlined"
+          color="primary"
+        />
+      </Box>
     </Box>
   );
 }

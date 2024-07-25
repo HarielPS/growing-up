@@ -1,22 +1,21 @@
-// theme.js
 import { createTheme } from '@mui/material/styles';
 
-export const lightTheme = createTheme({
+const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#1976d2', // Azul claro
+      main: '#1976d2',
     },
     secondary: {
-      main: '#dc004e', // Rojo
+      main: '#dc004e',
     },
     background: {
-      default: '#f5f5f5', // Fondo claro
-      paper: '#ffffff', // Fondo de papel
+      default: '#f5f5f5',
+      paper: '#ffffff',
     },
     text: {
-      primary: '#000000', // Texto negro
-      secondary: '#757575', // Texto gris
+      primary: '#000000',
+      secondary: '#757575',
     },
   },
   typography: {
@@ -30,27 +29,27 @@ export const lightTheme = createTheme({
       fontSize: '1rem',
     },
     button: {
-      textTransform: 'none', // Desactivar mayúsculas automáticas en botones
+      textTransform: 'none',
     },
   },
 });
 
-export const darkTheme = createTheme({
+const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#90caf9', // Azul claro
+      main: '#90caf9',
     },
     secondary: {
-      main: '#f48fb1', // Rosa claro
+      main: '#f48fb1',
     },
     background: {
-      default: '#303030', // Fondo oscuro
-      paper: '#424242', // Fondo de papel
+      default: '#303030',
+      paper: '#424242',
     },
     text: {
-      primary: '#ffffff', // Texto blanco
-      secondary: '#bdbdbd', // Texto gris claro
+      primary: '#ffffff',
+      secondary: '#bdbdbd',
     },
   },
   typography: {
@@ -64,7 +63,9 @@ export const darkTheme = createTheme({
       fontSize: '1rem',
     },
     button: {
-      textTransform: 'none', // Desactivar mayúsculas automáticas en botones
+      textTransform: 'none',
     },
   },
 });
+
+export { lightTheme, darkTheme };

@@ -10,7 +10,6 @@ import Image from "next/image";
 import styles from "./Layout.module.css"; // Import styles for the modal
 import WalletBalance from "@/component/web3/wallet/WalletBalance";
 import WalletSwitcher from "@/component/web3/wallet/WalletSwitcher";
-import { green } from "@mui/material/colors";
 
 export default function Layout({ children }) {
   const theme = useTheme();
@@ -80,8 +79,8 @@ export default function Layout({ children }) {
           width: "100%",
           height: '100vh',
           paddingTop: "60px",
-          // backgroundColor: theme.palette.background.default,
-          backgroundColor:'#A9FCAA',
+          backgroundColor: theme.palette.background.default,
+          // backgroundColor:'#A9FCAA',
            
         }}
       >
