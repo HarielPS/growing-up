@@ -14,6 +14,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import getColor from '@/themes/colorUtils';
 
 export default function CardFinance({
   imageSrc,
@@ -33,7 +34,7 @@ export default function CardFinance({
   const boxShadow = theme.palette.mode === 'dark' ? '0 4px 8px rgba(255, 255, 255, 0.2)' : '0 4px 8px rgba(0, 0, 0, 0.2)';
 
   return (
-    <Card sx={{ border: `1px solid ${borderColor}`, borderRadius: '8px', display: 'flex', flexDirection: 'column', boxShadow }}>
+    <Card sx={{ background:getColor(theme, 'third') , border: `1px solid ${borderColor}`, borderRadius: '8px', display: 'flex', flexDirection: 'column', boxShadow }}>
       <Box sx={{ paddingTop: '5vh', display: 'flex' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', width: '80%', paddingLeft: '2vh' }}>
           <div style={{ border: `1px solid ${borderColor}`, borderRadius: '10%', overflow: 'hidden', width: '200px', height: '200px', boxShadow }}>

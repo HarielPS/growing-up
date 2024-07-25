@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import CardFinance from '@/components/card/Card';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography, Pagination } from '@mui/material';
 import { db } from '../../../../../firebase'; // Adjust import path if necessary
 import { formatDistanceToNow } from 'date-fns';
+import Loading from '@/components/loading/loading';
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 5;
 
 export default function Page() {
   const [projects, setProjects] = useState([]);
@@ -64,41 +65,42 @@ export default function Page() {
     fetchProjects(currentPage);
   }, [currentPage]);
 
-  const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
-
-  const handlePrevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   return (
     <Box>
       <h1>Clientes</h1>
       {projects.map((project, index) => (
-        <CardFinance 
-          key={index}
-          imageSrc={project.imagen_solicitud}
-          projectTitle={project.titulo}
-          companyName={project.empresa}
-          completedProjects={project.estado_proyecto}
-          location={project.ubicacion}
-          duration={project.timeAgo} // Pass the calculated time ago
-          amountRaised={project.monto_recaudado}
-          percentageRaised={((project.monto_recaudado / project.monto_pedido) * 100).toFixed(2)}
-          tokenYield={`${project.rendimiento} / token`}
-          tags={project.categoria}
-          description={project.descripcion}
-        />
+        <Box key={index} sx={{ paddingY: '3vh' }}>
+          <CardFinance
+            imageSrc={project.imagen_solicitud}
+            projectTitle={project.titulo}
+            companyName={project.empresa}
+            completedProjects={project.estado_proyecto}
+            location={project.ubicacion}
+            duration={project.timeAgo}
+            amountRaised={project.monto_recaudado}
+            percentageRaised={((project.monto_recaudado / project.monto_pedido) * 100).toFixed(2)}
+            tokenYield={`${project.rendimiento} / token`}
+            tags={project.categoria}
+            description={project.descripcion}
+          />
+        </Box>
       ))}
-      <Box display="flex" justifyContent="space-between" mt={2}>
-        <Button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</Button>
-        <Typography>Page {currentPage} of {totalPages}</Typography>
-        <Button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</Button>
+      <Box display="flex" justifyContent="center" mt={2}>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          variant="outlined"
+          color="primary"
+        />
       </Box>
     </Box>
   );
