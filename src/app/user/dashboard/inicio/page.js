@@ -4,11 +4,13 @@ import styles from "../../../../components/user/inicio/inicio.module.css";
 import CardInfoInicio from "@/components/user/inicio/CardInfoInicio";
 import ChartTest from "../../../../components/user/inicio/ChartTest";
 import ChartTest2 from "@/components/user/inicio/ChartTest2";
+import MyResponsivePie from "@/components/grafica/dona";
+import MyResponsiveLine from "@/components/grafica/histograma";
 
 export default function Page() {
   return (
-    <div style={{ width: "100%", height: "calc(100vh - 60px)", background: "#EEF3F7" }}>
-      <div className="grid">
+    <div style={{ width: "100%", height: "100vh" }}>
+      <div className="flex flex-wrap justify-between">
         <CardInfoInicio
           title={"Proyectos activos"}
           numPrin={"12"}
@@ -42,24 +44,24 @@ export default function Page() {
           link={"wallet"}
         />
       </div>
-      <div className="grid" style={{ height: "calc(100% - 240px)" }}>
-      <div className="col-8" style={{ height: "100%" }}>
-        <div className="text-center p-3 border-round-sm bg-white font-bold" style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-          <div style={{ height: "100%", width: "100%", maxHeight: "100%", maxWidth: "100%", display:"flex",alignItems: "center", justifyContent: "center" }}>
-            <ChartTest2 />
+
+      <div className="flex flex-wrap" style={{ height: "calc(100% - 240px)" }}>
+        <div className="w-full lg:w-1/2 p-2 h-full">
+          <div className="h-full p-3 font-bold  flex items-center justify-center overflow-hidden">
+            <MyResponsiveLine />
           </div>
         </div>
-        </div>
-        <div className="col-4" style={{ height: '100%' }}>
-          <div className="text-center p-3 border-round-sm font-bold bg-white" style={{ height: '100%' }}>
-            <div className="grid" style={{ height: '50%', width: '100%', justifyContent: 'center' }}>
-              <ChartTest />
-            </div>
-            <div className="grid" style={{ height: '50%', width: '100%', justifyContent: 'center' }}>
-              <ChartTest />
-            </div>
+
+        <div className="w-full lg:w-1/2 p-2 h-full">
+          <div className="h-full p-3 font-bold  flex items-center justify-center overflow-hidden">
+            {/* <ChartTest /> */}
+            <MyResponsivePie />
           </div>
         </div>
+      </div>
+
+      <div style={{ width: '100%', marginTop: '20px' }}>
+        <MyResponsivePie />
       </div>
     </div>
   );

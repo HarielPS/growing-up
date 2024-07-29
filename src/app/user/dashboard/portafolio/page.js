@@ -11,7 +11,7 @@ export default function Page() {
       style={{
         width: "100%",
         height: "calc(100vh - 60px)",
-        background: "#EEF3F7",
+        // background: "#EEF3F7",
       }}
     >
       <div
