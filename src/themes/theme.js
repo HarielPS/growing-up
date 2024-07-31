@@ -38,18 +38,18 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#90caf9',
+      main: '#90caf9', //azul claro
     },
     secondary: {
-      main: '#f48fb1',
+      main: '#f48fb1',// rosa claro
     },
     background: {
-      default: '#303030',
-      paper: '#424242',
+      default: '#303030', //negro
+      paper: '#424242', // negro menos un tono
     },
     text: {
       primary: '#ffffff',
-      secondary: '#bdbdbd',
+      secondary: '#bdbdbd',//gris 
     },
   },
   typography: {

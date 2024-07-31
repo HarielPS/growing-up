@@ -5,31 +5,6 @@ import { Chart } from "primereact/chart";
 export default function ChartTest2() {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
-  /* const updateAspectRatio = () => {
-    const width = window.innerWidth;
-    console.log("Aqui el width: " +width);
-    console.log("Aqui el aspectRadio: " +chartOptions.aspectRatio);
-    let aspectRatio = 1; // valor por defecto
-
-    if (width < 1400) {
-      aspectRatio = 1; // relación de aspecto para pantallas pequeñas
-    } else if (width > 1900) {
-      aspectRatio = .6; // relación de aspecto para pantallas medianas
-    }
-
-    setChartOptions((prevOptions) => ({
-      ...prevOptions,
-      aspectRatio: aspectRatio,
-    }));
-  }; */
-  /* useEffect(() => {
-    updateAspectRatio(); // Inicializa el aspectRatio al cargar el componente
-    window.addEventListener("resize", updateAspectRatio); // Añade el event listener para redimensionar
-
-    return () => {
-      window.removeEventListener("resize", updateAspectRatio); // Limpia el event listener al desmontar
-    };
-  }, []); */
 
   useEffect(() => {
     const documentStyle = getComputedStyle(document.documentElement);
@@ -69,7 +44,6 @@ export default function ChartTest2() {
     const options = {
       responsive: true,
       maintainAspectRatio: false,
-      aspectRatio: .6,
       plugins: {
         legend: {
           labels: {
@@ -102,7 +76,7 @@ export default function ChartTest2() {
   }, []);
 
   return (
-    <div className="card" style={{ width: "100%", height: "100%", display:"flex", flexDirection:"column", justifyContent:"center"}}>
+    <div className="card" style={{ width: "100%", height: "100%" }}>
       <Chart type="line" data={chartData} options={chartOptions} />
     </div>
   );

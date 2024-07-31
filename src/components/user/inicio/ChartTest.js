@@ -30,7 +30,18 @@ export default function ChartTest() {
             cutout: '60%',
             responsive: true,
             maintainAspectRatio: false,
-            aspectRatio:1,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                        }
+                    }
+                }
+            },
         };
 
         setChartData(data);
@@ -38,9 +49,10 @@ export default function ChartTest() {
     }, []);
 
     return (
-        <div className="card flex justify-content-center">
-            <Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
+        <div className="card flex justify-content-center bg-black-alpha-40 pb-2">
+            <div style={{ width: '100%', maxWidth: '100%', height: '100%', minHeight: '300px' }}>
+                <Chart type="doughnut" data={chartData} options={chartOptions} />
+            </div>
         </div>
     )
 }
-        
