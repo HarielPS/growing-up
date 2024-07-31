@@ -2,79 +2,43 @@
 import { ResponsivePie } from '@nivo/pie';
 import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
-import getColor from '@/themes/colorUtils';
 
 const MyResponsivePie = () => {
     const data = [
         {
-            "id": "erlang",
-            "label": "erlang",
+            "id": "Al Corriente",
+            "label": "Al Corriente",
             "value": 583,
             "color": "hsl(124, 70%, 50%)"
         },
         {
-            "id": "lisp",
-            "label": "lisp",
+            "id": "En Proceso",
+            "label": "En Proceso",
             "value": 459,
             "color": "hsl(90, 10%, 10%)"
         },
         {
-            "id": "rust",
-            "label": "rust",
+            "id": "Atrasado",
+            "label": "Atrasado",
             "value": 81,
             "color": "hsl(100, 70%, 50%)"
         },
-        {
-            "id": "haskell",
-            "label": "haskell",
-            "value": 517,
-            "color": "hsl(256, 70%, 50%)"
-        },
-        {
-            "id": "make",
-            "label": "make",
-            "value": 91,
-            "color": "hsl(229, 70%, 50%)"
-        }
     ];
 
     const theme = useTheme();
-    const [legendDirection, setLegendDirection] = useState('row');
-    const [legendTranslateX, setLegendTranslateX] = useState(0);
-    const [legendTranslateY, setLegendTranslateY] = useState(0);
-    const [labelFontSize, setLabelFontSize] = useState(20);
-    const [legendFontSize, setLegendFontSize] = useState(14);
     const containerRef = useRef(null);
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-    const updateFontSize = () => {
-        const width = containerRef.current.offsetWidth;
-        if (width < 400) {
-            setLabelFontSize(10);
-            setLegendFontSize(8);
-        } else if (width < 768) {
-            setLabelFontSize(12);
-            setLegendFontSize(10);
-        } else {
-            setLabelFontSize(20);
-            setLegendFontSize(14);
-        }
+    const updateScreenSize = () => {
+        const width = containerRef.current ? containerRef.current.offsetWidth : window.innerWidth;
+        setIsSmallScreen(width < 600);
     };
 
     useEffect(() => {
-        const handleResize = () => {
-            setLegendDirection(window.innerWidth < 768 ? 'column' : 'row');
-            updateFontSize();
-        };
-
-        window.addEventListener('resize', handleResize);
-        handleResize(); // Call handler right away so state gets updated with initial window size
-
-        return () => window.removeEventListener('resize', handleResize);
+        updateScreenSize();
+        window.addEventListener('resize', updateScreenSize);
+        return () => window.removeEventListener('resize', updateScreenSize);
     }, []);
-
-    useEffect(() => {
-        updateFontSize();
-    }, [containerRef.current]);
 
     const textColor = theme.palette.mode === 'dark' ? '#FFFFFF' : '#000000';
     const tooltipBackgroundColor = theme.palette.mode === 'dark' ? '#333333' : '#FFFFFF';
@@ -84,7 +48,7 @@ const MyResponsivePie = () => {
         <div ref={containerRef} style={{ height: '100%', width: '100%', minHeight: '400px' }}>
             <ResponsivePie
                 data={data}
-                margin={{ top: 40, right: 80, bottom: 150, left: 80 }}
+                margin={{ top: 40, right: 140, bottom: isSmallScreen ? 150 : 80, left: 90 }}
                 innerRadius={0.5}
                 padAngle={0.7}
                 cornerRadius={3}
@@ -112,60 +76,30 @@ const MyResponsivePie = () => {
                 fill={[
                     {
                         match: {
-                            id: 'ruby'
+                            id: 'Al Corriente'
                         },
                         id: 'dots'
                     },
                     {
                         match: {
-                            id: 'c'
+                            id: 'En Proceso'
                         },
                         id: 'dots'
                     },
                     {
                         match: {
-                            id: 'go'
+                            id: 'Atrasado'
                         },
                         id: 'dots'
                     },
-                    {
-                        match: {
-                            id: 'python'
-                        },
-                        id: 'dots'
-                    },
-                    {
-                        match: {
-                            id: 'scala'
-                        },
-                        id: 'lines'
-                    },
-                    {
-                        match: {
-                            id: 'lisp'
-                        },
-                        id: 'lines'
-                    },
-                    {
-                        match: {
-                            id: 'elixir'
-                        },
-                        id: 'lines'
-                    },
-                    {
-                        match: {
-                            id: 'javascript'
-                        },
-                        id: 'lines'
-                    }
                 ]}
                 legends={[
                     {
-                        anchor: 'bottom',
-                        direction: legendDirection,
+                        anchor:'bottom',
+                        direction:'row',
                         justify: false,
-                        translateX: legendTranslateX,
-                        translateY: 140,
+                        translateX: 0,
+                        translateY: 50,
                         itemsSpacing: 5,
                         itemWidth: 100,
                         itemHeight: 18,
@@ -187,13 +121,13 @@ const MyResponsivePie = () => {
                 theme={{
                     labels: {
                         text: {
-                            fontSize: labelFontSize,
+                            fontSize: 12,
                             fill: textColor
                         }
                     },
                     legends: {
                         text: {
-                            fontSize: legendFontSize,
+                            fontSize: 14,
                             fill: textColor
                         }
                     },
@@ -201,8 +135,12 @@ const MyResponsivePie = () => {
                         container: {
                             background: tooltipBackgroundColor,
                             color: tooltipTextColor,
-                        }
-                    }
+                            fontSize: 'inherit',
+                            borderRadius: '2px',
+                            boxShadow: '0 3px 6px rgba(0, 0, 0, 0.1)',
+                            padding: '5px 9px',
+                        },
+                    },
                 }}
             />
         </div>

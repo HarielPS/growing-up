@@ -1,6 +1,7 @@
 "use client";
 import { ResponsiveLine } from '@nivo/line';
 import React from 'react';
+import { useTheme } from '@mui/material/styles';
 
 const MyResponsiveLine = () => {
     const data = [
@@ -38,6 +39,11 @@ const MyResponsiveLine = () => {
             ]
         }
     ];
+
+    const theme = useTheme();
+    const textColor = theme.palette.mode === 'dark' ? '#FFFFFF' : '#000000';
+    const tooltipBackgroundColor = theme.palette.mode === 'dark' ? '#333333' : '#FFFFFF';
+    const tooltipTextColor = theme.palette.mode === 'dark' ? '#FFFFFF' : '#000000';
 
     return (
         <div style={{ height: '100%', width: '100%', minHeight: '400px' }}>
@@ -92,6 +98,7 @@ const MyResponsiveLine = () => {
                         justify: false,
                         translateX: 110,
                         translateY: 0,
+                        itemTextColor: textColor,
                         itemsSpacing: 0,
                         itemDirection: 'left-to-right',
                         itemWidth: 80,
@@ -112,12 +119,45 @@ const MyResponsiveLine = () => {
                     }
                 ]}
                 theme={{
+                    axis: {
+                        ticks: {
+                            text: {
+                                fill: textColor // Color del texto en los ticks del eje
+                            }
+                        },
+                        legend: {
+                            text: {
+                                fill: textColor // Color del texto en la leyenda del eje
+                            }
+                        }
+                    },
                     grid: {
                         line: {
-                            stroke: '#ddd',
-                            strokeWidth: 1
+                            stroke: textColor // Color de las líneas de la rejilla
                         }
-                    }
+                    },
+                    labels: {
+                        text: {
+                            fontSize: 12,
+                            fill: textColor // Color del texto de las etiquetas de los puntos
+                        }
+                    },
+                    legends: {
+                        text: {
+                            fontSize: 14,
+                            fill: textColor // Color del texto en la leyenda
+                        }
+                    },
+                    tooltip: {
+                        container: {
+                            background: tooltipBackgroundColor,
+                            color: tooltipTextColor,
+                            fontSize: 'inherit',
+                            borderRadius: '2px',
+                            boxShadow: '0 3px 6px rgba(0, 0, 0, 0.1)',
+                            padding: '5px 9px',
+                        },
+                    },
                 }}
             />
         </div>

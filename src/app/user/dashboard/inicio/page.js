@@ -1,22 +1,37 @@
-import React from "react";
-// import { Card } from "primereact/card";
-import styles from "../../../../components/user/inicio/inicio.module.css";
+"use client";
+import React, { useState, useEffect } from "react";
 import CardInfoInicio from "@/components/user/inicio/CardInfoInicio";
-import ChartTest from "../../../../components/user/inicio/ChartTest";
-import ChartTest2 from "@/components/user/inicio/ChartTest2";
 import MyResponsivePie from "@/components/grafica/dona";
 import MyResponsiveLine from "@/components/grafica/histograma";
+import { Box, Grid } from "@mui/material";
 
-export default function Page() {
+const Page = () => {
+  const [gridHeight, setGridHeight] = useState('calc(100% - 240px)');
+
+  const updateGridHeight = () => {
+    const screenHeight = window.innerHeight;
+    if (screenHeight < 600) {
+      setGridHeight('100% - 100px'); // Ajuste para pantallas pequeñas
+    } else {
+      setGridHeight('calc(100% - 240px)'); // Ajuste para pantallas grandes
+    }
+  };
+
+  useEffect(() => {
+    updateGridHeight(); // Establece el valor inicial
+    window.addEventListener('resize', updateGridHeight); // Actualiza el valor cuando se redimensiona la ventana
+    return () => window.removeEventListener('resize', updateGridHeight);
+  }, []);
+
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <Box sx={{ width: '100%', height: '100vh'}}>
       <div className="flex flex-wrap justify-between">
         <CardInfoInicio
           title={"Proyectos activos"}
           numPrin={"12"}
           icon={"pi-desktop"}
           numText={""}
-          text={""}
+          text={"hola"}
           link={"portafolio"}
         />
         <CardInfoInicio
@@ -24,7 +39,7 @@ export default function Page() {
           numPrin={"19"}
           icon={"pi-users"}
           numText={""}
-          text={""}
+          text={"Proyectos financiados"}
           link={"portafolio"}
         />
         <CardInfoInicio
@@ -32,7 +47,7 @@ export default function Page() {
           numPrin={"34"}
           icon={"pi-flag-fill"}
           numText={""}
-          text={""}
+          text={"Proyectos concluidos, puedes consultarlos en tus proyectos"}
           link={"historial"}
         />
         <CardInfoInicio
@@ -40,29 +55,26 @@ export default function Page() {
           numPrin={"3,465"}
           icon={"pi-money-bill"}
           numText={""}
-          text={""}
+          text={"Ganancias totales de los rendimientos de tu inversion, tomando en cuenta tambien tu capital de inversion"}
           link={"wallet"}
         />
       </div>
 
-      <div className="flex flex-wrap" style={{ height: "calc(100% - 240px)" }}>
-        <div className="w-full lg:w-1/2 p-2 h-full">
-          <div className="h-full p-3 font-bold  flex items-center justify-center overflow-hidden">
+      <Grid container spacing={2} sx={{ height: 'calc(100% - 150px)', mt: 2 }}>
+        <Grid item xs={12} lg={8} sx={{ height: '100%' }}>
+          <Box sx={{ height: '100%', p: 2 }}>
             <MyResponsiveLine />
-          </div>
-        </div>
+          </Box>
+        </Grid>
 
-        <div className="w-full lg:w-1/2 p-2 h-full">
-          <div className="h-full p-3 font-bold  flex items-center justify-center overflow-hidden">
-            {/* <ChartTest /> */}
+        <Grid item xs={12} lg={4} sx={{ height: '100%', mt: { xs: 10, lg: 0 }  }}>
+          <Box sx={{ height: '100%', p: 2 }}>
             <MyResponsivePie />
-          </div>
-        </div>
-      </div>
-
-      <div style={{ width: '100%', marginTop: '20px' }}>
-        <MyResponsivePie />
-      </div>
-    </div>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
+
+export default Page;

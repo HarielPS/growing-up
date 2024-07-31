@@ -1,0 +1,78 @@
+Proyecto:
+
+-Titulo
+-empresa (referencia)
+-imagen_solicitud (storage)
+//-ref_empresa_proyectos_Terminados
+-Estado solicitud
+-Estado proyecto
+-ubicacion
+-date_proyecto    -> (fecha actual de solicitud emitida (tiempo de la solicitud, tiempo actual y formula para restar con la actual))
+-Descripcion
+-(array)categoria
+-
+-monto_pedido
+-monto_recaudado (suma de todas los pagos)
+-//ecuacion_ "(monto_recaudado*100)/monto_pedido"
+-rendimiento
+
+Contrato:
+
+-ID_proyecto (referencia)
+-ID_ contrato
+-fecha_pago
+-Inversores
+    -Id_inversor(referencia)
+        -wallet
+        -monto_invertido
+        -fecha y hora de monto_invertido
+        -ganancia(mensual)
+-Duracion_contrato
+-Monto_pedido
+-Rendimiento
+-Estado
+
+
+
+
+
+
+Empresa
+-Wallet
+    -metamask
+        -1: aijfaijsiajsiajad
+        -2: aisnaksnakn3ekm
+    -coinbase
+        -1: aijfaijsiajsiajad
+        -2: aisnaksnakn3ekm
+-nombre
+-Direccion
+-(map)proyectos
+    -Progreso
+        1: ref-proyectos_ID
+    -Terminados
+        2: ref-proyectos_ID
+
+
+categoria:
+
+-Empaquetado
+-Tecnología
+-Comida
+-Distribución
+-Salud
+-Educación
+-Energía
+-Transporte
+-Medios
+-Agricultura
+-Finanzas
+-Deporte
+-Moda
+-Turismo
+-Arte
+-Construcción
+-Comercio
+-Seguridad
+-Biotecnología
+-Medioambiente
