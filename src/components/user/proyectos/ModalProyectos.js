@@ -12,17 +12,17 @@ import Typography from "@mui/material/Typography";
 import { Box, width } from "@mui/system";
 import { useLocalStorage } from 'primereact/hooks';
 
-export default function MaximizableDemo() {
+export default function MaximizableDemo({ project, visible, onHide }) {
   const theme = useTheme();
   const borderColor = theme.palette.mode === "dark" ? "#CFCFCF" : "#B2B2B2";
   const boxShadow =
     theme.palette.mode === "dark"
       ? "0 4px 8px rgba(255, 255, 255, 0.2)"
       : "0 4px 8px rgba(0, 0, 0, 0.2)";
-  const [visible, setVisible] = useState(false);
-  const [walletAddress,setWalletAddress] = useState('');
+  const [walletAddress, setWalletAddress] = useState('');
 
   useEffect(()=>{
+    console.log(project);
     const actualizarValor = () =>{
       const storedValue = localStorage.getItem('connectedWalletAddress');
       setWalletAddress(storedValue || '--');
@@ -35,13 +35,7 @@ export default function MaximizableDemo() {
   },[]);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        minHeight: "auto",
-      }}
-    >
+    <Dialog header="Project Details" visible={visible} onHide={onHide} maximizable>
       <Card
         sx={{
           background: getColor(theme, "third"),
@@ -62,8 +56,8 @@ export default function MaximizableDemo() {
             }}
           >
             <Image
-              src="https://imgs.search.brave.com/JgOcQKuOzkHXbwxwGya4Unvsj_TLF3WUanhXjyEx9Ls/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuY2RubG9nby5j/b20vbG9nb3MvZi84/MS9mZW1zYS5zdmc"
-              alt="Image"
+              src={project.imagen_solicitud}
+              alt={`${project.empresa} Logo`}
               width="200"
             />
           </div>
@@ -85,7 +79,7 @@ export default function MaximizableDemo() {
             </div>
             <div style={{}}>
               <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                Fomento Economico MExicano S.A de C.V
+                {project.empresa}
               </Typography>
             </div>
             <div
@@ -110,7 +104,7 @@ export default function MaximizableDemo() {
                       alignItems: "center",
                     }}
                   >
-                    Crecimiento en planta 2-H
+                    {project.titulo}
                   </Typography>
                   <Typography
                     variant="body2"
@@ -119,7 +113,7 @@ export default function MaximizableDemo() {
                       alignItems: "center",
                     }}
                   >
-                    ID_Proyecto
+                    ID_Proyecto: {project.id}
                   </Typography>
                   <Typography
                     variant="body2"
@@ -128,7 +122,7 @@ export default function MaximizableDemo() {
                       alignItems: "center",
                     }}
                   >
-                    2 Meses
+                    {project.duracion}
                   </Typography>
                 </div>
                 <div style={{ height: "50%", marginTop: "1vh" }}>
@@ -173,7 +167,7 @@ export default function MaximizableDemo() {
                       style={{ width: "80%" }}
                       disabled
                       placeholder="Disabled"
-                      value="50 / 100%"
+                      value={`${project.monto_recaudado} / 100%`}
                     />
                   </div>
                   <div style={{ display: "column", width: "50%" }}>
@@ -186,7 +180,7 @@ export default function MaximizableDemo() {
                     <InputText
                       disabled
                       placeholder="Disabled"
-                      value="$34.34"
+                      value={`$${project.monto_pedido}`}
                       style={{ width: "80%" }}
                     />
                   </div>
@@ -264,6 +258,6 @@ export default function MaximizableDemo() {
           Al invertir, confirmas los terminos de uso de Growin-up
         </Typography>
       </Card>
-    </div>
+    </Dialog>
   );
 }

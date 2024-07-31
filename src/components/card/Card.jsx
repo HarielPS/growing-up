@@ -13,6 +13,7 @@ import { Box } from '@mui/system';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ScheduleIcon from '@mui/icons-material/Schedule';
+import TimerOffIcon from '@mui/icons-material/TimerOff';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import getColor from '@/themes/colorUtils';
 
@@ -27,14 +28,16 @@ export default function CardFinance({
   percentageRaised,
   tokenYield,
   tags,
-  description
+  description,
+  fecha_cad,
+  onViewMore // Add onViewMore prop
 }) {
   const theme = useTheme();
   const borderColor = theme.palette.mode === 'dark' ? '#CFCFCF' : '#B2B2B2';
   const boxShadow = theme.palette.mode === 'dark' ? '0 4px 8px rgba(255, 255, 255, 0.2)' : '0 4px 8px rgba(0, 0, 0, 0.2)';
 
   return (
-    <Card sx={{ background:getColor(theme, 'third') , border: `1px solid ${borderColor}`, borderRadius: '8px', display: 'flex', flexDirection: 'column', boxShadow }}>
+    <Card sx={{ background: getColor(theme, 'third') , border: `1px solid ${borderColor}`, borderRadius: '8px', display: 'flex', flexDirection: 'column', boxShadow }}>
       <Box sx={{ paddingTop: '5vh', display: 'flex' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', width: '80%', paddingLeft: '2vh' }}>
           <div style={{ border: `1px solid ${borderColor}`, borderRadius: '10%', overflow: 'hidden', width: '200px', height: '200px', boxShadow }}>
@@ -64,10 +67,15 @@ export default function CardFinance({
                 {location}
               </span>
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{display:'flex', alignItems:'center', marginTop:'1vh'}}>
-              <ScheduleIcon sx={{marginRight:'10px'}}/>
+            <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', marginTop: '1vh' }}>
+              <ScheduleIcon sx={{ marginRight: '10px' }} />
               <span style={{ display: 'flex', alignItems: 'center' }}>
-                {duration}
+                {duration && typeof duration === 'object' ? duration.toString() : duration}
+              </span>
+              <Typography sx={{ marginX: '10px' }}>-</Typography>
+              <TimerOffIcon sx={{ marginRight: '8px' }} />
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                Solicitud valida hasta: {fecha_cad && typeof fecha_cad === 'object' ? fecha_cad.toString() : fecha_cad}
               </span>
             </Typography>
           </Box>
@@ -75,13 +83,13 @@ export default function CardFinance({
 
         <Box sx={{ display: 'flex', flexDirection: 'column', width: '20%', paddingRight: '5vh' }}>
           <Typography variant="h5" color="primary" sx={{ fontWeight: 'bold', textAlign: 'right' }}>
-            ${amountRaised}
+            
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'right' }}>
-            Recaudado: {percentageRaised}%
+            Recaudado:${amountRaised}    -   {percentageRaised}%
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'right' }}>
-            Rendimiento {tokenYield} / token
+            Rendimiento: {tokenYield}
           </Typography>
         </Box>
       </Box>
@@ -99,7 +107,7 @@ export default function CardFinance({
       </CardContent>
 
       <CardActions sx={{ display: 'flex', justifyContent: 'flex-end', marginRight: '30px', marginBottom: '30px' }}>
-        <Button variant="contained" color="primary" sx={{ borderRadius: '8px', boxShadow }}>
+        <Button variant="contained" color="primary" sx={{ borderRadius: '8px', boxShadow }} onClick={onViewMore}>
           Ver más
         </Button>
       </CardActions>

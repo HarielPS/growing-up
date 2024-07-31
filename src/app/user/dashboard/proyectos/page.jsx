@@ -2,12 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import CardFinance from '@/components/card/Card';
 import { Box, Typography, Pagination } from '@mui/material';
-import { db } from '../../../../../firebase'; // Adjust import path if necessary
-import { formatDistanceToNow } from 'date-fns';
+import { db } from '../../../../../firebase';
+import { formatDistanceToNow,format } from 'date-fns';
 import Loading from '@/components/loading/loading';
-import ModalProyectos from '@/components/user/proyectos/ModalProyectos';
-import { Dialog } from "primereact/dialog";
-
+import MaximizableDemo from '@/components/user/proyectos/ModalProyectos';
 
 const ITEMS_PER_PAGE = 5;
 
@@ -16,7 +14,8 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null); // Add state for the selected project
 
   const fetchProjects = async (page) => {
     setLoading(true);
@@ -33,6 +32,7 @@ export default function Page() {
 
       const projectPromises = querySnapshot.docs.map(async (doc) => {
         let data = doc.data();
+        data.id = doc.id; 
         if (data.empresa) {
           const empresaDoc = await data.empresa.get();
           if (empresaDoc.exists) {
@@ -52,6 +52,11 @@ export default function Page() {
         }
         const fechaSolicitudDate = data.fecha_solicitud.toDate();
         data.timeAgo = formatDistanceToNow(fechaSolicitudDate, { addSuffix: true });
+        if (data.fecha_caducidad) {
+          const fechaCaducidadDate = data.fecha_caducidad.toDate();
+          data.fecha_caducidad_format = format(fechaCaducidadDate, 'dd/MM/yyyy');
+        }
+
         return data;
       });
 
@@ -73,25 +78,17 @@ export default function Page() {
     setCurrentPage(value);
   };
 
+  const handleViewMore = (project) => {
+    setSelectedProject(project);
+    setModalVisible(true);
+  };
+
   if (loading) {
     return <Loading />;
   }
 
   return (
     <Box>
-      <Dialog
-        header="Invertir capital en una empresa"
-        visible={modalVisible}
-        maximizable
-        style={{ width: "auto",backgroundColor:'#000' }}
-        breakpoints={{ "960px": "75vw", "641px": "100vw" }}
-        onHide={() => {
-          if (!modalVisible) return;
-          setModalVisible(false);
-        }}
-      >
-        <ModalProyectos />
-      </Dialog>
       <h1>Clientes</h1>
       {projects.map((project, index) => (
         <Box key={index} sx={{ paddingY: '3vh' }}>
@@ -104,9 +101,11 @@ export default function Page() {
             duration={project.timeAgo}
             amountRaised={project.monto_recaudado}
             percentageRaised={((project.monto_recaudado / project.monto_pedido) * 100).toFixed(2)}
-            tokenYield={`${project.rendimiento} / token`}
+            tokenYield={`${project.rendimiento} %`}
             tags={project.categoria}
             description={project.descripcion}
+            fecha_cad={project.fecha_caducidad_format}
+            onViewMore={() => handleViewMore(project)} // Pass the project data to the handler
           />
         </Box>
       ))}
@@ -119,6 +118,13 @@ export default function Page() {
           color="primary"
         />
       </Box>
+      {modalVisible && selectedProject && (
+        <MaximizableDemo
+          project={selectedProject}
+          visible={modalVisible}
+          onHide={() => setModalVisible(false)}
+        />
+      )}
     </Box>
   );
 }
