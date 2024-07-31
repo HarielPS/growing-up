@@ -5,6 +5,9 @@ import { Box, Typography, Pagination } from '@mui/material';
 import { db } from '../../../../../firebase'; // Adjust import path if necessary
 import { formatDistanceToNow } from 'date-fns';
 import Loading from '@/components/loading/loading';
+import ModalProyectos from '@/components/user/proyectos/ModalProyectos';
+import { Dialog } from "primereact/dialog";
+
 
 const ITEMS_PER_PAGE = 5;
 
@@ -13,6 +16,7 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [modalVisible, setModalVisible] = useState(true);
 
   const fetchProjects = async (page) => {
     setLoading(true);
@@ -23,7 +27,7 @@ export default function Page() {
         .startAt(offset)
         .limit(ITEMS_PER_PAGE)
         .get();
-      
+
       const totalCount = await db.collection('proyecto').get().then(snapshot => snapshot.size);
       setTotalPages(Math.ceil(totalCount / ITEMS_PER_PAGE));
 
@@ -70,11 +74,24 @@ export default function Page() {
   };
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
     <Box>
+      <Dialog
+        header="Invertir capital en una empresa"
+        visible={modalVisible}
+        maximizable
+        style={{ width: "auto",backgroundColor:'#000' }}
+        breakpoints={{ "960px": "75vw", "641px": "100vw" }}
+        onHide={() => {
+          if (!modalVisible) return;
+          setModalVisible(false);
+        }}
+      >
+        <ModalProyectos />
+      </Dialog>
       <h1>Clientes</h1>
       {projects.map((project, index) => (
         <Box key={index} sx={{ paddingY: '3vh' }}>
