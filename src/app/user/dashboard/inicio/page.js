@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import CardInfoInicio from "@/components/user/inicio/CardInfoInicio";
-import MyResponsivePie from "@/components/grafica/dona";
+import MyResponsivePie from "@/components/grafica/pastel";
 import MyResponsiveLine from "@/components/grafica/histograma";
 import { Box, Grid } from "@mui/material";
+import MyResponsiveBar from "@/components/grafica/barras";
 
 const Page = () => {
   const [gridHeight, setGridHeight] = useState('calc(100% - 240px)');
@@ -24,15 +25,21 @@ const Page = () => {
   }, []);
 
   return (
-    <Box sx={{ width: '100%', height: '100vh'}}>
-      <div className="flex flex-wrap justify-between">
+    <Box sx={{ width: '100%', height: '100vh' }}>
+      <Box sx={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Box sx={{ height: '100%', width: '100%' }}>
+          <MyResponsiveLine />
+        </Box>
+      </Box>
+      <div className="flex flex-wrap justify-between mt-5">
         <CardInfoInicio
           title={"Proyectos activos"}
           numPrin={"12"}
-          icon={"pi-desktop"}
+          icon={"pi-wallet"}
           numText={""}
-          text={"hola"}
+          text={"texto 1"}
           link={"portafolio"}
+          color={"bg-green-500"}
         />
         <CardInfoInicio
           title={"Proyectos en fondeo"}
@@ -49,6 +56,7 @@ const Page = () => {
           numText={""}
           text={"Proyectos concluidos, puedes consultarlos en tus proyectos"}
           link={"historial"}
+          color={"bg-gray-900"}
         />
         <CardInfoInicio
           title={"Ganancias totales"}
@@ -57,22 +65,19 @@ const Page = () => {
           numText={""}
           text={"Ganancias totales de los rendimientos de tu inversion, tomando en cuenta tambien tu capital de inversion"}
           link={"wallet"}
+          color={"bg-yellow-500"}
         />
       </div>
 
-      <Grid container spacing={2} sx={{ height: 'calc(100% - 150px)', mt: 2 }}>
-        <Grid item xs={12} lg={8} sx={{ height: '100%' }}>
-          <Box sx={{ height: '100%', p: 2 }}>
-            <MyResponsiveLine />
-          </Box>
-        </Grid>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', height: 'calc(100% - 150px)', mt: 2 }}>
+        <Box sx={{ height: '100%', width: { xs: '100%', md: '50%' } }}>
+          <MyResponsiveBar />
+        </Box>
 
-        <Grid item xs={12} lg={4} sx={{ height: '100%', mt: { xs: 10, lg: 0 }  }}>
-          <Box sx={{ height: '100%', p: 2 }}>
-            <MyResponsivePie />
-          </Box>
-        </Grid>
-      </Grid>
+        <Box sx={{ height: '100%', width: { xs: '100%', md: '50%' }, mt: { xs: 10, md: 0 } }}>
+          <MyResponsivePie />
+        </Box>
+      </Box>
     </Box>
   );
 }

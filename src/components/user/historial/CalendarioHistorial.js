@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
 import { Calendar } from 'primereact/calendar';
 import { Dialog } from 'primereact/dialog';
@@ -32,8 +32,8 @@ export default function CalendarioHistorial() {
     };
 
     return (
-        <div className="card flex justify-content-center" style={{ width: "100%", padding: "0" }}>
-            <Calendar value={date} onChange={onDateSelect} inline showWeek />
+        <div className="card" style={{ width: "100%", height: "100%", padding: 0, boxSizing: 'border-box' }}>
+            <Calendar value={date} onChange={onDateSelect} inline showWeek style={{ width: "100%", height: "100%", boxSizing: 'border-box' }} />
             <Dialog header="Payment Information" visible={modalVisible} style={{ width: '50vw' }} onHide={() => setModalVisible(false)}>
                 {selectedEvent && (
                     <div>

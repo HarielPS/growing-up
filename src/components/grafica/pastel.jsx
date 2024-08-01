@@ -3,25 +3,37 @@ import { ResponsivePie } from '@nivo/pie';
 import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
 
-const MyResponsivePieAdjusted = () => {
+const MyResponsivePie = () => {
     const data = [
         {
-            "id": "Al Corriente",
-            "label": "Al Corriente",
-            "value": 583,
-            "color": "hsl(124, 70%, 50%)"
+            "id": "Technology",
+            "label": "Technology",
+            "value": 400,
+            "color": "hsl(210, 70%, 50%)"
         },
         {
-            "id": "En Proceso",
-            "label": "En Proceso",
-            "value": 459,
-            "color": "hsl(90, 10%, 10%)"
-        },
-        {
-            "id": "Atrasado",
-            "label": "Atrasado",
-            "value": 81,
+            "id": "Health",
+            "label": "Health",
+            "value": 300,
             "color": "hsl(100, 70%, 50%)"
+        },
+        {
+            "id": "Finance",
+            "label": "Finance",
+            "value": 200,
+            "color": "hsl(50, 70%, 50%)"
+        },
+        {
+            "id": "Education",
+            "label": "Education",
+            "value": 150,
+            "color": "hsl(340, 70%, 50%)"
+        },
+        {
+            "id": "Others",
+            "label": "Others",
+            "value": 50,
+            "color": "hsl(280, 70%, 50%)"
         },
     ];
 
@@ -31,7 +43,7 @@ const MyResponsivePieAdjusted = () => {
 
     const updateScreenSize = () => {
         const width = containerRef.current ? containerRef.current.offsetWidth : window.innerWidth;
-        setIsSmallScreen(width < 1024);
+        setIsSmallScreen(width < 600);
     };
 
     useEffect(() => {
@@ -45,43 +57,42 @@ const MyResponsivePieAdjusted = () => {
     const tooltipTextColor = theme.palette.mode === 'dark' ? '#FFFFFF' : '#000000';
 
     return (
-        <div ref={containerRef} style={{ height: '90%', width: '90%'}}>
+        <div ref={containerRef} style={{ height: '100%', width: '100%', minHeight: '400px' }}>
             <ResponsivePie
                 data={data}
+                margin={{ top: 40, right: 150, bottom: 80, left: 90 }}
                 innerRadius={0.5}
                 padAngle={0.7}
                 cornerRadius={3}
                 activeInnerRadiusOffset={8}
-                activeOuterRadiusOffset={isSmallScreen ? 0 : 16}
-                colors={{ scheme: 'dark2' }}
+                activeOuterRadiusOffset={16}
+                colors={{ scheme: 'category10' }}
                 borderWidth={1}
                 borderColor={{
                     from: 'color',
                     modifiers: [
                         [
                             'darker',
-                            '0'
+                            '0.2'
                         ]
                     ]
                 }}
-                // Disable arcLinkLabels
-                arcLinkLabelsSkipAngle={360} // Skip all angles
-                arcLinkLabelsTextOffset={0}
-                arcLinkLabelsTextColor="none"
-                arcLinkLabelsDiagonalLength={0}
-                arcLinkLabelsStraightLength={0}
-                arcLinkLabelsThickness={0}
-                arcLinkLabelsColor="none"
+                arcLinkLabelsTextOffset={5}
+                arcLinkLabelsTextColor={textColor}
+                arcLinkLabelsDiagonalLength={13}
+                arcLinkLabelsStraightLength={9}
+                arcLinkLabelsThickness={3}
+                arcLinkLabelsColor={{ from: 'color' }}
                 arcLabelsSkipAngle={10}
                 arcLabelsTextColor={textColor}
                 legends={[
                     {
-                        anchor: 'bottom',
+                        anchor: 'right',
                         direction: 'column',
                         justify: false,
-                        translateX: 200,
-                        translateY: -20,
-                        itemsSpacing: 6,
+                        translateX: 140,
+                        translateY: 0,
+                        itemsSpacing: 5,
                         itemWidth: 100,
                         itemHeight: 18,
                         itemTextColor: textColor,
@@ -100,6 +111,12 @@ const MyResponsivePieAdjusted = () => {
                     }
                 ]}
                 theme={{
+                    labels: {
+                        text: {
+                            fontSize: 12,
+                            fill: textColor
+                        }
+                    },
                     legends: {
                         text: {
                             fontSize: 14,
@@ -122,4 +139,4 @@ const MyResponsivePieAdjusted = () => {
     );
 };
 
-export default MyResponsivePieAdjusted;
+export default MyResponsivePie;

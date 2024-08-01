@@ -1,47 +1,25 @@
 import React from "react";
-import ChartHistorial from "../../../../components/user/historial/ChartHistorial";
-import TablaPortafolio from "@/components/user/portafolio/TablaPortafolio";
+import InvestmentHistory from "@/components/user/historial/tabla";
 import CalendarioHistorial from "@/components/user/historial/CalendarioHistorial";
+import { Box, Grid } from "@mui/material";
+
 export default function Page() {
   return (
     <>
-      <div className="grid" style={{ height: "100%" }}>
-        <div className="col-8" style={{ overflow: "hidden" }}>
-          <div
-            className="text-center border-round-sm bg-white font-bold"
-            style={{ overflow: "auto", maxHeight: "80vh", height: "100%" }}
-          >
-            <TablaPortafolio />
-          </div>
-        </div>
-        <div className="col-4" style={{ height: "100%" }}>
-          <div className="grid" style={{ height: "100%", margin: "0" }}>
-            <div
-              className="text-center border-round-sm bg-white font-bold"
-              style={{
-                height: "100%", // Cambia a 100% para llenar el contenedor padre
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "auto",
-                padding: "10px",
-              }}
-            >
+      <Box sx={{ height: "100%", width: '100%', padding: 2 }}>
+        <Grid container spacing={2} sx={{ height: "100%" }}>
+          <Grid item xs={12} md={8} sx={{ height: "100%" }}>
+            <Box sx={{ height: "100%", paddingRight: 4 }}>
+              <InvestmentHistory />
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={4} sx={{ height: "100%", width:'100%', display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ flex: 1, width:'100%' , backgroundColor: 'white', borderRadius: 2, padding: 0, display: 'flex', flexDirection: 'column' }}>
               <CalendarioHistorial />
-            </div>
-          </div>
-          {/*
-            <div
-            className="grid text-center border-round-sm bg-white font-bold p-2"
-            style={{ height: "50%" }}
-          >
-            <ChartHistorial />
-          </div>
-            */}
-          
-        </div>
-      </div>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 }

@@ -46,7 +46,7 @@ const MyResponsiveLine = () => {
     const tooltipTextColor = theme.palette.mode === 'dark' ? '#FFFFFF' : '#000000';
 
     return (
-        <div style={{ height: '100%', width: '100%', minHeight: '400px' }}>
+        <div style={{ height: '100%', width: '100%' }}>
             <ResponsiveLine
                 data={data}
                 margin={{ top: 50, right: 150, bottom: 50, left: 80 }}
@@ -58,7 +58,7 @@ const MyResponsiveLine = () => {
                     stacked: true,
                     reverse: false
                 }}
-                curve="linear"
+                curve="cardinal"
                 yFormat=" >-.2f"
                 axisTop={null}
                 axisRight={null}
@@ -79,15 +79,16 @@ const MyResponsiveLine = () => {
                     legendPosition: 'middle'
                 }}
                 enableGridX={false}
-                colors={{ scheme: 'category10' }}
+                colors={{ scheme: 'set1' }}
                 lineWidth={3}
                 pointSize={10}
-                pointColor="#ffffff"
+                pointColor={{ theme: 'background' }}
                 pointBorderWidth={2}
                 pointBorderColor={{ from: 'serieColor' }}
-                pointLabel="y"
+                pointLabel="data.yFormatted"
                 pointLabelYOffset={-12}
                 enableArea={true}
+                areaBlendMode="normal"
                 areaBaselineValue={0}
                 areaOpacity={0.25}
                 useMesh={true}
@@ -122,30 +123,30 @@ const MyResponsiveLine = () => {
                     axis: {
                         ticks: {
                             text: {
-                                fill: textColor // Color del texto en los ticks del eje
+                                fill: textColor 
                             }
                         },
                         legend: {
                             text: {
-                                fill: textColor // Color del texto en la leyenda del eje
+                                fill: textColor 
                             }
                         }
                     },
                     grid: {
                         line: {
-                            stroke: textColor // Color de las líneas de la rejilla
+                            stroke: textColor 
                         }
                     },
                     labels: {
                         text: {
                             fontSize: 12,
-                            fill: textColor // Color del texto de las etiquetas de los puntos
+                            fill: textColor 
                         }
                     },
                     legends: {
                         text: {
                             fontSize: 14,
-                            fill: textColor // Color del texto en la leyenda
+                            fill: textColor 
                         }
                     },
                     tooltip: {

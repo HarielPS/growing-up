@@ -15,6 +15,12 @@ Proyecto:
 -monto_recaudado (suma de todas los pagos)
 -//ecuacion_ "(monto_recaudado*100)/monto_pedido"
 -rendimiento
+--------Marlon
+    -- fecha de caducidad de solicitud
+    -- fecha (formula fecha caducidad + dias de plazo)///////
+    
+
+
 
 Contrato:
 

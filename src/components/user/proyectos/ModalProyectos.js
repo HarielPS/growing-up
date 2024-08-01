@@ -167,7 +167,8 @@ export default function MaximizableDemo({ project, visible, onHide }) {
                       style={{ width: "80%" }}
                       disabled
                       placeholder="Disabled"
-                      value={`${project.monto_recaudado} / 100%`}
+                      // percentageRaised={((project.monto_recaudado / project.monto_pedido) * 100).toFixed(2)}
+                      value={`${project.monto_recaudado} / ${((project.monto_recaudado / project.monto_pedido) * 100).toFixed(1)}%`}
                     />
                   </div>
                   <div style={{ display: "column", width: "50%" }}>

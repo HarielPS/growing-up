@@ -100,6 +100,7 @@ export default function Page() {
             location={project.ubicacion}
             duration={project.timeAgo}
             amountRaised={project.monto_recaudado}
+            goalamount={project.monto_pedido}
             percentageRaised={((project.monto_recaudado / project.monto_pedido) * 100).toFixed(2)}
             tokenYield={`${project.rendimiento} %`}
             tags={project.categoria}
