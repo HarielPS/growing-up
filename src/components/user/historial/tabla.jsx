@@ -6,14 +6,14 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import TableHead from '@mui/material/TableHead';
 import Avatar from '@mui/material/Avatar';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Divider } from '@mui/material';
 import getColor from '@/themes/colorUtils';
 
@@ -31,6 +31,14 @@ function createData(project, term, date, status, amount, earnings, img) {
 }
 
 const initialRows = [
+  createData('Mis inversiones', '1 mes', '11/02/24', 'Pagado', 97.85, 628),
+  createData('Mis inversiones', '1 mes', '02/02/24', 'Pagado', 105.40, 841),
+  createData('Mis inversiones', '2 mes', '03/02/24', 'Cancelado', 53.98, 535),
+  createData('Mis inversiones', '1 mes', '14/02/24', 'Pagado', 92.42, 855),
+  createData('Mis inversiones', '2 mes', '21/02/24', 'Pagado', 15.69, 375),
+  createData('Mis inversiones', '1 mes', '17/02/24', 'Pagado', 47.10, 338),
+  createData('Mis inversiones', '2 mes', '21/02/24', 'Pagado', 15.69, 375),
+  createData('Mis inversiones', '2 mes', '21/02/24', 'Pagado', 15.69, 375),
   createData('Mis inversiones', '1 mes', '11/02/24', 'Pagado', 97.85, 628),
   createData('Mis inversiones', '1 mes', '02/02/24', 'Pagado', 105.40, 841),
   createData('Mis inversiones', '2 mes', '03/02/24', 'Cancelado', 53.98, 535),
@@ -84,9 +92,12 @@ export default function InvestmentTable() {
   }
 
   return (
+    // <Box sx={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
     <Box>
       <Paper sx={{
         width: '100%',
+        overflow: 'hidden',
+        height: '100%',
         boxShadow: `1px 1px 9px 10px ${getColor(theme, 'shadow')}`,
       }}>
         <TableContainer>
@@ -112,7 +123,7 @@ export default function InvestmentTable() {
                         <Typography variant="body1" fontWeight="bold">${row.amount.toFixed(2)}</Typography>
                       </Box>
                       <Box display="flex" alignItems="center">
-                        <ArrowDownwardIcon sx={{ color: iconColor.down, fontSize: 16 }} />
+                        <ArrowForwardIcon sx={{ color: iconColor.down, fontSize: 16 }} />
                         <Typography variant="body2" color="textSecondary">${row.earnings}</Typography>
                       </Box>
                     </Box>
