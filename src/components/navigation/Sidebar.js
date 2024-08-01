@@ -16,6 +16,7 @@ import { useTheme } from '@mui/material/styles';
 import { Box, color } from "@mui/system";
 import { Typography } from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 export default function SideBar({ visible, handleVisible }) {
@@ -120,16 +121,22 @@ export default function SideBar({ visible, handleVisible }) {
                   </ul>
                 </div>
                 <div className="mt-auto">
-                  <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
+                  <hr className="mx-3 border-top-1 border-none surface-border mb-0" />
                   <a
                     v-ripple
-                    className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                    className=" flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
                     style={{ color: theme.palette.text.primary }}
                   >
                     <Avatar image={userInfo.image} shape="circle" />
                     <span className="font-bold" sx={{color:theme.palette.text.primary}}>{userInfo.name}</span>
                   </a>
                 </div>
+                <Button className="flex items-center bg-blue-600 justify-center text-white py-2 px-4 rounded-t-xl">
+                  <Box sx={{marginRight:2}}>
+                    <LogoutIcon/>
+                  </Box>
+                  <span>Cerrar sesión</span>
+                </Button>
               </div>
             </Box>
           </Box>
