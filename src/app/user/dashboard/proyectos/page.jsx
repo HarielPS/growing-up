@@ -89,7 +89,6 @@ export default function Page() {
 
   return (
     <Box>
-      <h1>Clientes</h1>
       {projects.map((project, index) => (
         <Box key={index} sx={{ paddingY: '3vh' }}>
           <CardFinance

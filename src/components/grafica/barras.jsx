@@ -5,6 +5,8 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
+import { Box } from '@mui/system';
+import { Typography } from '@mui/material';
 
 // Example data
 const data = [
@@ -26,91 +28,96 @@ const MyResponsiveBar = () => {
     const tooltipTextColor = theme.palette.mode === 'dark' ? '#FFFFFF' : '#000000';
 
     return (
-        <ResponsiveBar
-            data={data}
-            keys={['projects']}
-            indexBy="month"
-            margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-            padding={0.3}
-            groupMode="grouped"
-            valueScale={{ type: 'linear' }}
-            indexScale={{ type: 'band', round: true }}
-            colors={({ id, data }) => colorScale(data.month)}
-            borderColor={{
-                from: 'color',
-                modifiers: [
-                    [
-                        'darker',
-                        1.6
+        <>
+            <Typography variant="h5" align="center" gutterBottom sx={{fontWeight: 'bold'}}>
+            Monthly Investment Projects
+            </Typography>
+            <ResponsiveBar
+                data={data}
+                keys={['projects']}
+                indexBy="month"
+                margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+                padding={0.3}
+                groupMode="grouped"
+                valueScale={{ type: 'linear' }}
+                indexScale={{ type: 'band', round: true }}
+                colors={({ id, data }) => colorScale(data.month)}
+                borderColor={{
+                    from: 'color',
+                    modifiers: [
+                        [
+                            'darker',
+                            1.6
+                        ]
                     ]
-                ]
-            }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: 'month',
-                legendPosition: 'middle',
-                legendOffset: 32,
-                tickColor: textColor,
-                legendTextColor: textColor,
-            }}
-            axisLeft={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: 'projects',
-                legendPosition: 'middle',
-                legendOffset: -40,
-                tickColor: textColor,
-                legendTextColor: textColor,
-            }}
-            labelSkipWidth={12}
-            labelSkipHeight={12}
-            labelTextColor={textColor}
-            legends={[]}
-            role="application"
-            ariaLabel="Nivo bar chart demo"
-            barAriaLabel={e => e.id + ": " + e.formattedValue + " in month: " + e.indexValue}
-            theme={{
-                axis: {
-                    ticks: {
+                }}
+                axisTop={null}
+                axisRight={null}
+                axisBottom={{
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                    legend: 'month',
+                    legendPosition: 'middle',
+                    legendOffset: 32,
+                    tickColor: textColor,
+                    legendTextColor: textColor,
+                }}
+                axisLeft={{
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                    legend: 'projects',
+                    legendPosition: 'middle',
+                    legendOffset: -40,
+                    tickColor: textColor,
+                    legendTextColor: textColor,
+                }}
+                labelSkipWidth={12}
+                labelSkipHeight={12}
+                labelTextColor={textColor}
+                legends={[]}
+                role="application"
+                ariaLabel="Nivo bar chart demo"
+                barAriaLabel={e => e.id + ": " + e.formattedValue + " in month: " + e.indexValue}
+                theme={{
+                    axis: {
+                        ticks: {
+                            text: {
+                                fill: textColor
+                            }
+                        },
+                        legend: {
+                            text: {
+                                fill: textColor
+                            }
+                        }
+                    },
+                    labels: {
                         text: {
+                            fontSize: 12,
                             fill: textColor
                         }
                     },
-                    legend: {
+                    legends: {
                         text: {
+                            fontSize: 14,
                             fill: textColor
                         }
-                    }
-                },
-                labels: {
-                    text: {
-                        fontSize: 12,
-                        fill: textColor
-                    }
-                },
-                legends: {
-                    text: {
-                        fontSize: 14,
-                        fill: textColor
-                    }
-                },
-                tooltip: {
-                    container: {
-                        background: tooltipBackgroundColor,
-                        color: tooltipTextColor,
-                        fontSize: 'inherit',
-                        borderRadius: '2px',
-                        boxShadow: '0 3px 6px rgba(0, 0, 0, 0.1)',
-                        padding: '5px 9px',
                     },
-                },
-            }}
-        />
+                    tooltip: {
+                        container: {
+                            background: tooltipBackgroundColor,
+                            color: tooltipTextColor,
+                            fontSize: 'inherit',
+                            borderRadius: '2px',
+                            boxShadow: '0 3px 6px rgba(0, 0, 0, 0.1)',
+                            padding: '5px 9px',
+                        },
+                    },
+                }}
+            />
+        </>
     );
 };
 

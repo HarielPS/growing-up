@@ -2,6 +2,7 @@
 import { ResponsivePie } from '@nivo/pie';
 import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 
 const MyResponsivePie = () => {
     const data = [
@@ -58,6 +59,9 @@ const MyResponsivePie = () => {
 
     return (
         <div ref={containerRef} style={{ height: '100%', width: '100%', minHeight: '400px' }}>
+            <Typography variant="h5" align="center" gutterBottom sx={{fontWeight: 'bold'}}>
+            Investment Distribution by Category
+            </Typography>
             <ResponsivePie
                 data={data}
                 margin={{ top: 40, right: 150, bottom: 80, left: 90 }}

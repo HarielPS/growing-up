@@ -173,7 +173,7 @@ export default function InvestmentTable() {
   );
 
   if (loading) {
-    return <Loading />;
+    // return <Loading />;
   }
 
   return (

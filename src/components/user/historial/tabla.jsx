@@ -33,7 +33,7 @@ function createData(project, term, date, status, amount, earnings, img) {
 const initialRows = [
   createData('Mis inversiones', '1 mes', '11/02/24', 'Pagado', 97.85, 628),
   createData('Mis inversiones', '1 mes', '02/02/24', 'Pagado', 105.40, 841),
-  createData('Mis inversiones', '2 mes', '03/02/24', 'Cancelado', 53.98, 535),
+  createData('Mis inversiones', '2 mes', '03/02/24', 'Atrasado', 53.98, 535),
   createData('Mis inversiones', '1 mes', '14/02/24', 'Pagado', 92.42, 855),
   createData('Mis inversiones', '2 mes', '21/02/24', 'Pagado', 15.69, 375),
   createData('Mis inversiones', '1 mes', '17/02/24', 'Pagado', 47.10, 338),
@@ -41,7 +41,7 @@ const initialRows = [
   createData('Mis inversiones', '2 mes', '21/02/24', 'Pagado', 15.69, 375),
   createData('Mis inversiones', '1 mes', '11/02/24', 'Pagado', 97.85, 628),
   createData('Mis inversiones', '1 mes', '02/02/24', 'Pagado', 105.40, 841),
-  createData('Mis inversiones', '2 mes', '03/02/24', 'Cancelado', 53.98, 535),
+  createData('Mis inversiones', '2 mes', '03/02/24', 'Atrasado', 53.98, 535),
   createData('Mis inversiones', '1 mes', '14/02/24', 'Pagado', 92.42, 855),
   createData('Mis inversiones', '2 mes', '21/02/24', 'Pagado', 15.69, 375),
   createData('Mis inversiones', '1 mes', '17/02/24', 'Pagado', 47.10, 338),
@@ -51,7 +51,7 @@ const initialRows = [
 
 const statusColors = {
   'Pagado': 'green',
-  'Cancelado': 'orange',
+  'Atrasado': 'orange',
 };
 
 const iconColor = {
@@ -88,7 +88,7 @@ export default function InvestmentTable() {
   };
 
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    // return <Typography>Loading...</Typography>;
   }
 
   return (

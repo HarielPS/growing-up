@@ -103,7 +103,7 @@ export default function CardFinance({
           <Box sx={{ marginTop: '1vh' }}>
             <ProgressBarWithLabel progress={percentageRaised} />
           </Box>
-          <Chip icon={<TrendingUpIcon />} label={`Rendimiento: ${tokenYield}`}/>      
+          <Chip icon={<TrendingUpIcon sx={{color: theme.palette.text.primary}}/>} label={`Rendimiento: ${tokenYield}`} sx={{background:getColor(theme,'fifth')}}/>      
         </Box>
       </Box>
 

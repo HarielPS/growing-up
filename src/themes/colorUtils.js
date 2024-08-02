@@ -7,7 +7,9 @@ const getColor = (theme, colorName) => {
     third: theme.palette.mode === 'dark' ? '#929292' : '#ECECEC',
     fourth: theme.palette.mode === 'dark' ? '#444444' : '#FFCC00',
     fifth: theme.palette.mode === 'dark' ? '#333333' : '#ffffff',
+    fifth_rev: theme.palette.mode === 'dark' ? '#121212' : '#ffffff',
     six: theme.palette.mode === 'dark' ? '#333333' : '#ebebeb',
+    seven: theme.palette.mode === 'dark' ? '#434343' : '#f5f5f5',
     head: theme.palette.mode === 'dark' ? '#121212' : '#eaeaea',
 
     // Agregar más colores personalizados aquí

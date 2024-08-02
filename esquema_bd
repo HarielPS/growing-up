@@ -15,6 +15,8 @@ Proyecto:
 -monto_recaudado (suma de todas los pagos)
 -//ecuacion_ "(monto_recaudado*100)/monto_pedido"
 -rendimiento
+
+-- lapso de tiempo//
 --------Marlon
     -- fecha de caducidad de solicitud
     -- fecha (formula fecha caducidad + dias de plazo)///////
@@ -22,21 +24,25 @@ Proyecto:
 
 
 
-Contrato:
+Contrato:  -  se realiza a la par de proyecto y solo se irian agregando inversores y al llegar al 100% del monto se realiza el contrato y se pone el contrato
 
 -ID_proyecto (referencia)
 -ID_ contrato
--fecha_pago
+-fecha_pago (lapso)(calcular con formula) //
+-fecha de smart contract //
 -Inversores
     -Id_inversor(referencia)
         -wallet
         -monto_invertido
         -fecha y hora de monto_invertido
         -ganancia(mensual)
--Duracion_contrato
+        -ganancia total//*
+-Duracion_contrato // meses 
 -Monto_pedido
 -Rendimiento
 -Estado
+-gas //
+
 
 
 

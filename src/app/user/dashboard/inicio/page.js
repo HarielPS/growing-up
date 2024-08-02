@@ -5,6 +5,7 @@ import MyResponsivePie from "@/components/grafica/pastel";
 import MyResponsiveLine from "@/components/grafica/histograma";
 import { Box, Grid } from "@mui/material";
 import MyResponsiveBar from "@/components/grafica/barras";
+import { display } from "@mui/system";
 
 const Page = () => {
   const [gridHeight, setGridHeight] = useState('calc(100% - 240px)');
@@ -31,13 +32,13 @@ const Page = () => {
           <MyResponsiveLine />
         </Box>
       </Box>
-      <div className="flex flex-wrap justify-between mt-5">
+      <div className="flex flex-wrap justify-between mt-8">
         <CardInfoInicio
           title={"Proyectos activos"}
           numPrin={"12"}
           icon={"pi-wallet"}
           numText={""}
-          text={"texto 1"}
+          text={"Número de proyectos en los que actualmente has invertido y estas generando ganancias"}
           link={"portafolio"}
           color={"bg-green-500"}
         />
@@ -46,7 +47,7 @@ const Page = () => {
           numPrin={"19"}
           icon={"pi-users"}
           numText={""}
-          text={"Proyectos financiados"}
+          text={"Número de proyectos que has invertido pero estan en progreso de fondeo en este momento"}
           link={"portafolio"}
         />
         <CardInfoInicio
@@ -54,7 +55,7 @@ const Page = () => {
           numPrin={"34"}
           icon={"pi-flag-fill"}
           numText={""}
-          text={"Proyectos concluidos, puedes consultarlos en tus proyectos"}
+          text={"Cantidad de proyectos que han sido completados y ya generan ganancias"}
           link={"historial"}
           color={"bg-gray-900"}
         />
@@ -63,7 +64,7 @@ const Page = () => {
           numPrin={"3,465"}
           icon={"pi-money-bill"}
           numText={""}
-          text={"Ganancias totales de los rendimientos de tu inversion, tomando en cuenta tambien tu capital de inversion"}
+          text={"Ganancias acumuladas de todas las inversiones realizadas a través de la plataforma."}
           link={"wallet"}
           color={"bg-yellow-500"}
         />

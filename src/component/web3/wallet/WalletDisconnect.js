@@ -36,5 +36,14 @@ export const clearLocalStorage_exID = () => {
     console.log('Local storage cleared');
 };
 
+export const logoutexit = () => {
+    console.log('Clearing local storage...');
+    localStorage.removeItem('connectedWalletAddress');
+    localStorage.removeItem('connectedWalletName');
+    localStorage.removeItem('userId');
+    console.log('Local storage cleared');
+    window.location.href = '/';
+};
+
 
 export default WalletDisconnect;

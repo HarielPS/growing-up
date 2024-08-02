@@ -2,6 +2,7 @@
 import { ResponsiveLine } from '@nivo/line';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 
 const MyResponsiveLine = () => {
     const data = [
@@ -47,9 +48,12 @@ const MyResponsiveLine = () => {
 
     return (
         <div style={{ height: '100%', width: '100%' }}>
+            <Typography variant="h5" align="center" gutterBottom sx={{fontWeight: 'bold'}}>
+                Investment and Earnings Over Time
+            </Typography>
             <ResponsiveLine
                 data={data}
-                margin={{ top: 50, right: 150, bottom: 50, left: 80 }}
+                margin={{ top: 10, right: 150, bottom: 50, left: 80 }}
                 xScale={{ type: 'point' }}
                 yScale={{
                     type: 'linear',

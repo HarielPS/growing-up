@@ -6,11 +6,16 @@ import { Box } from "@mui/system";
 import InvestmentTable from "@/components/user/portafolio/tabla";
 import { Typography, Divider } from "@mui/material";
 import MyResponsivePie from "@/components/grafica/dona";
+import getColor from "@/themes/colorUtils";
+import { useTheme } from '@mui/material/styles';
+
 
 export default function Page() {
+  const theme = useTheme();
+
   return (
     <Box sx={{ width: '100%', height: '100vh', padding: 2 }}>
-      <Box sx={{display:'flex', flexDirection: { xs: "column", md: "row" }, alignItems: 'center', height: { xs: '100%', md: '40%' }, marginBottom:'2vh', background:'#f5f5f5', borderRadius: 2, padding: 2, boxShadow: 1 }}>
+      <Box sx={{display:'flex', flexDirection: { xs: "column", md: "row" }, alignItems: 'center', height: { xs: '100%', md: '40%' }, marginBottom:'2vh', background: getColor(theme,"seven"), borderRadius: 2, padding: 2, boxShadow: 1 }}>
         
         <Box
           sx={{
@@ -19,7 +24,7 @@ export default function Page() {
             justifyContent: "center",
             alignItems: "center",
             padding: 2,
-            backgroundColor: "#ffffff",
+            backgroundColor: getColor(theme,"fifth_rev"),
             borderRadius: 2,
             boxShadow: 1,
             width: { xs: '100%', md: '50%' },
@@ -50,7 +55,7 @@ export default function Page() {
         </Box>
 
         
-          <Box sx={{ height: '100%', width: { xs: '100%', md: '50%' }, background:'#ffffff', borderRadius: 2, boxShadow: 1, padding:1 , alignContent:'center'}}>
+          <Box sx={{ height: '100%', width: { xs: '100%', md: '50%' }, background:getColor(theme,"fifth_rev"), borderRadius: 2, boxShadow: 1, padding:1 , alignContent:'center'}}>
             <MyResponsivePie />
           </Box>
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Sidebar } from "primereact/sidebar";
 import { Button } from "primereact/button";
 import { Avatar } from "primereact/avatar";
@@ -17,6 +17,9 @@ import { Box, color } from "@mui/system";
 import { Typography } from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { db } from '../../../firebase';
+import { getDoc, doc } from 'firebase/firestore';
+import { logoutexit } from "@/component/web3/wallet/WalletDisconnect";
 
 
 export default function SideBar({ visible, handleVisible }) {
@@ -29,6 +32,40 @@ export default function SideBar({ visible, handleVisible }) {
   const btnRef2 = useRef(null);
   const btnRef3 = useRef(null);
   const btnRef4 = useRef(null);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // Leer los datos de localStorage
+    const storedUserId = localStorage.getItem('userId');
+    setUserId(storedUserId);
+
+    if (storedUserId) {
+      fetchUserInfo(storedUserId);
+    }
+  }, []);
+
+  const fetchUserInfo = async (userId) => {
+    try {
+      const userDocRef = doc(db, 'inversor', userId);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const fullName = `${userData.nombre} ${userData.apellidos}`;
+        setUserInfo(prevState => ({
+          ...prevState,
+          name: fullName,
+        }));
+      } else {
+        console.log('No such document!');
+      }
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+  };
+
+  const handlelogout = () => {
+    logoutexit();
+  };
 
   return (
     <div className="card flex justify-content-center">
@@ -127,11 +164,11 @@ export default function SideBar({ visible, handleVisible }) {
                     className=" flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
                     style={{ color: theme.palette.text.primary }}
                   >
-                    <Avatar image={userInfo.image} shape="circle" />
+                    <Avatar image='/' shape="circle" />
                     <span className="font-bold" sx={{color:theme.palette.text.primary}}>{userInfo.name}</span>
                   </a>
                 </div>
-                <Button className="flex items-center bg-blue-600 justify-center text-white py-2 px-4 rounded-t-xl">
+                <Button className="flex items-center bg-blue-600 hover:bg-blue-800 justify-center text-white py-2 px-4 rounded-t-xl" onClick={handlelogout}>
                   <Box sx={{marginRight:2}}>
                     <LogoutIcon/>
                   </Box>

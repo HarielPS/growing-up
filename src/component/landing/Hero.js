@@ -10,18 +10,18 @@ import Slide from '@mui/material/Slide';
 const slides = [
   {
     image: '/first.jpg',
-    title: 'DebtConnect: Revolucionando el Financiamiento Empresarial',
-    text: 'DebtConnect utiliza la tecnología blockchain y el crowdfunding para optimizar el flujo de efectivo de las empresas. Con condiciones justas y una plataforma digital sin complicaciones, estamos transformando la forma en que se gestionan las finanzas empresariales.',
+    title: 'Growing Up: Revolucionando el Financiamiento Empresarial',
+    text: 'Growing Up utiliza la tecnología blockchain y el crowdfunding para optimizar el flujo de efectivo de las empresas. Con condiciones justas y una plataforma digital sin complicaciones, estamos transformando la forma en que se gestionan las finanzas empresariales.',
   },
   {
-    image: '/second.png',
-    title: 'Invierte y Gana con DebtConnect',
-    text: 'Invierte en el crecimiento empresarial y genera ganancias mensuales con DebtConnect. Tu inversión ayuda a financiar facturas y deudas, mientras recibes retornos estables y atractivos.',
+    image: '/second.jpg',
+    title: 'Invierte y Gana con Growing Up',
+    text: 'Invierte en el crecimiento empresarial y genera ganancias mensuales con Growing Up. Tu inversión ayuda a financiar facturas y deudas, mientras recibes retornos estables y atractivos.',
   },
   {
     image: '/third.jpg',
-    title: 'Optimiza tu Liquidez con DebtConnect',
-    text: 'Paga tus deudas y obtén préstamos con tasas competitivas a través de DebtConnect. Mejora tu flujo de efectivo y asegura el crecimiento de tu empresa de manera eficiente y transparente.',
+    title: 'Optimiza tu Liquidez con Growing Up',
+    text: 'Paga tus deudas y obtén préstamos con tasas competitivas a través de Growing Up. Mejora tu flujo de efectivo y asegura el crecimiento de tu empresa de manera eficiente y transparente.',
   },
 ];
 
