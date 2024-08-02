@@ -1,174 +1,172 @@
 ## QuickStarter
 
-1. Clona el repositorio
+1. Clone the repository
 
         git clone https://github.com/HarielPS/growing-up.git
 
-2. Haz npm install
+2. Run npm install
 
         npm install
 
-3. Corre el proyecto
+3. Start the project
 
         npm run dev
 
 # Growing UP
 
-*Impulsando tus sueños, construyendo futuro*
+*Empowering your dreams, building the future*
 
-<img src="public/logo.png" alt="Logo de la Aplicacion" width="400" height="200">
+<img src="public/logo.png" alt="Application Logo" width="400" height="200">
 
-"Growing UP" es una plataforma de crowdfunding descentralizada en ZetaChain centrada en Bitcoin. Nuestro objetivo es conectar a inversores que buscan rendimientos en BTC con proyectos innovadores que necesitan financiación, proporcionando un entorno seguro y transparente.
+"Growing UP" is a decentralized crowdfunding platform on ZetaChain centered around Bitcoin. Our goal is to connect investors seeking returns in BTC with innovative projects needing funding, providing a secure and transparent environment.
 
-## ¿Para Qué Sirve?
-Growing UP permite a las empresas obtener el capital necesario para financiar diversos proyectos a través de inversiones colaborativas. Los inversores pueden participar en múltiples proyectos desde diferentes blockchains, asegurando así la diversificación y seguridad de sus inversiones.
+## What Is It For?
+Growing UP allows businesses to obtain the necessary capital to finance various projects through collaborative investments. Investors can participate in multiple projects from different blockchains, ensuring diversification and security of their investments.
 
-Este es el link de nuestra página web:
-[Growing Up](https://conexionemprendedora.z13.web.core.windows.net/)
+Here is the link to our website:
+[Growing Up](https://growing-up-angel-hack.netlify.app/)
 
-[Video demostrativo](https://youtu.be/_0BpMj-AcPw)
+[Demonstration Video](https://youtu.be/_0BpMj-AcPw)
 
-# Contenido
+# Contents
 
-* [Página Principal](#página-principal)
-* [Inicio](#inicio)
-* [Portafolio](#portafolio)
-* [Historial](#historial)
-* [Proyectos](#proyectos)
-* [Propuesta de Valor](#propuesta-de-valor)
-* [Características y Funcionalidades](#características-y-funcionalidades)
-* [Colaboradores](#colaboradores)
+* [Home Page](#home-page)
+* [Dashboard](#dashboard)
+* [Portfolio](#portfolio)
+* [History](#history)
+* [Projects](#projects)
+* [Value Proposition](#value-proposition)
+* [Features and Functionalities](#features-and-functionalities)
+* [Contributors](#contributors)
 
-## Página Principal
+## Home Page
 
-¿Cómo funciona? Bueno, tenemos varias secciones, pero veamos la primera vista que se nos muestra en cuanto se accede a la app.
+How does it work? Well, we have several sections, but let's look at the first view that is shown when accessing the app.
 
-<img src="public/readme/landing.png" alt="Página Principal" width="600" height="300">
+<img src="public/readme/landing.png" alt="Home Page" width="600" height="300">
 
+This space presents information about our application and offers several options to explore its content, including:
 
-Este espacio presenta información sobre nuestra aplicación y ofrece varias opciones para explorar su contenido, incluyendo:
-
-- **Testimonios:** Descubre lo que nuestros clientes dicen de nuestros productos, destacando eficiencia, durabilidad y satisfacción.
+- **Testimonials:** Discover what our customers say about our products, highlighting efficiency, durability, and satisfaction.
   
-<img src="public/readme/testimonio.png" alt="testimonios" width="600" height="300">
+<img src="public/readme/testimonio.png" alt="Testimonials" width="600" height="300">
 
-- **Información sobre el Financiamiento:** Explicación de cómo Growing Up impulsa el crecimiento de las empresas mediante financiamiento rápido y transparente.
+- **Information on Financing:** Explanation of how Growing Up drives business growth through fast and transparent financing.
   
-<img src="public/readme/info.png" alt="Informacion" width="600" height="300">
+<img src="public/readme/info.png" alt="Information" width="600" height="300">
 
-- **Sección de Ventajas:** Destaca las ventajas de invertir y ganar con Growing Up, incluyendo opciones de financiamiento seguro y oportunidades de inversión rentables.
+- **Advantages Section:** Highlights the advantages of investing and earning with Growing Up, including secure financing options and profitable investment opportunities.
   
-<img src="public/readme/landing2.png" alt="Página Principal" width="600" height="300">
+<img src="public/readme/landing2.png" alt="Home Page" width="600" height="300">
 
-Este espacio también ofrece acceso a preguntas frecuentes y proporciona información detallada sobre cómo utilizar la plataforma Growing Up para alcanzar los objetivos empresariales de manera ágil y transparente.
+This space also provides access to frequently asked questions and detailed information on how to use the Growing Up platform to achieve business goals in an agile and transparent manner.
 
-## Inicio
-Proporciona una visión general del estado de la cuenta del usuario, inversiones y ganancias.
+## Dashboard
+Provides an overview of the user's account status, investments, and earnings.
 
-<img src="public/readme/inicio.png" alt="Inicio" width="600" height="300">
+<img src="public/readme/inicio.png" alt="Dashboard" width="600" height="300">
 
 <br></br>
 
-<img src="public/readme/inicio2.png" alt="Inicio" width="600" height="300">
+<img src="public/readme/inicio2.png" alt="Dashboard" width="600" height="300">
 
-* **Visualización de Métricas:**
-  - **Proyectos Activos:** Número de proyectos en curso en los que el usuario ha invertido.
-  - **Inversiones Totales:** Monto total que el usuario ha invertido.
-  - **Ganancias Totales:** Ganancias totales de todas las inversiones.
-  - **Ganancias del Mes Actual:** Ganancias del mes actual.
-  - **Próximos Pagos:** Total de pagos que se recibirán en el próximo mes.
+* **Metrics Visualization:**
+  - **Active Projects:** Number of ongoing projects in which the user has invested.
+  - **Total Investments:** Total amount the user has invested.
+  - **Total Earnings:** Total earnings from all investments.
+  - **Current Month Earnings:** Earnings for the current month.
+  - **Upcoming Payments:** Total payments to be received in the next month.
 
-* **Visualización Gráfica:**
-  - **Gráfico de Línea:** Crecimiento de las inversiones totales a lo largo del tiempo.
-  - **Gráfico de Pastel:** Desglose de las ganancias por categorías de proyectos.
+* **Graphical Visualization:**
+  - **Line Chart:** Growth of total investments over time.
+  - **Pie Chart:** Breakdown of earnings by project categories.
 
-## Portafolio
-Proporciona información detallada sobre todas las inversiones y su estado.
+## Portfolio
+Provides detailed information about all investments and their status.
 
-<img src="public/readme/Portafolio.png" alt="Portafolio" width="600" height="300">
+<img src="public/readme/Portafolio.png" alt="Portfolio" width="600" height="300">
 
-* **Lista Detallada de Inversiones:**
-  - Nombre del proyecto, monto de la inversión, ganancias obtenidas, próximo pago esperado y estado (por ejemplo, Al Corriente, Atrasado, Completado).
-  - Categorías de proyectos y una breve descripción.
+* **Detailed Investment List:**
+  - Project name, investment amount, earnings obtained, next expected payment, and status (e.g., Current, Late, Completed).
+  - Project categories and a brief description.
 
-* **Visualización Gráfica:**
-  - **Gráfico de Barras:** Inversiones por categorías de proyectos.
-  - **Gráfico de Línea:** Rendimiento de inversiones individuales a lo largo del tiempo.
+* **Graphical Visualization:**
+  - **Bar Chart:** Investments by project categories.
+  - **Line Chart:** Performance of individual investments over time.
 
-## Historial
-Mostrar el historial de transacciones, incluidos los pagos y los cronogramas de inversión.
+## History
+Displays the transaction history, including payments and investment schedules.
 
-<img src="public/readme/historial.png" alt="Historial" width="600" height="300">
+<img src="public/readme/historial.png" alt="History" width="600" height="300">
 
-* **Lista de Transacciones:**
-  - Listar todas las transacciones con fechas, montos y descripciones (por ejemplo, Inversión, Ganancias, Retiro).
+* **Transaction List:**
+  - Lists all transactions with dates, amounts, and descriptions (e.g., Investment, Earnings, Withdrawal).
 
-* **Vista de Calendario:**
-  - Resaltar las fechas de pagos futuros y transacciones pasadas.
-  - Código de colores para diferentes tipos de transacciones (por ejemplo, Inversión, Ganancias).
+* **Calendar View:**
+  - Highlights future payment dates and past transactions.
+  - Color-coded for different types of transactions (e.g., Investment, Earnings).
 
-* **Visualización Gráfica:**
-  - **Gráfico de Línea:** Rastrear ganancias mensuales e inversiones a lo largo del tiempo.
-  - **Gráfico de Pastel:** Desglose de tipos de transacciones.
+* **Graphical Visualization:**
+  - **Line Chart:** Track monthly earnings and investments over time.
+  - **Pie Chart:** Breakdown of transaction types.
 
-## Proyectos
-Mostrar los proyectos disponibles para inversión con información detallada.
+## Projects
+Displays projects available for investment with detailed information.
 
-<img src="public/readme/proyectos.png" alt="Proyectos" width="600" height="300">
+<img src="public/readme/proyectos.png" alt="Projects" width="600" height="300">
 
 <br></br>
 
-<img src="public/readme/proyectos.png" alt="Proyectos" width="600" height="300">
+<img src="public/readme/proyectos.png" alt="Projects" width="600" height="300">
 
-* **Lista de Proyectos:**
-  - Nombre del proyecto, descripción, categorías, monto necesario y estado actual de financiamiento.
-  - Incluir objetivos del proyecto y retornos esperados.
+* **Project List:**
+  - Project name, description, categories, required amount, and current funding status.
+  - Include project goals and expected returns.
 
-* **Visualización Gráfica:**
-  - **Barra de Progreso:** Mostrar el progreso de financiamiento para cada proyecto.
-  - **Etiquetas de Categoría:** Etiquetas visuales para categorías de proyectos (por ejemplo, Tecnología, Salud).
+* **Graphical Visualization:**
+  - **Progress Bar:** Shows the funding progress for each project.
+  - **Category Tags:** Visual tags for project categories (e.g., Technology, Health).
 
-## Propuesta de Valor
+## Value Proposition
 
-1. **Diversificación de Inversiones:** Los inversores pueden participar en múltiples proyectos de diferentes sectores y blockchains, aumentando las oportunidades de rendimiento.
-2. **Mayor Seguridad:** La tokenización de activos reales como inmuebles, maquinaria e inventarios ofrece una garantía sólida para los inversores.
-3. **Transparencia:** Todos los procesos están registrados en la blockchain, asegurando la trazabilidad y auditabilidad.
-4. **Accesibilidad:** La plataforma facilita el acceso a financiación para proyectos innovadores que de otra manera tendrían dificultades para obtenerla.
+1. **Investment Diversification:** Investors can participate in multiple projects from different sectors and blockchains, increasing return opportunities.
+2. **Increased Security:** The tokenization of real assets such as real estate, machinery, and inventory provides solid guarantees for investors.
+3. **Transparency:** All processes are recorded on the blockchain, ensuring traceability and auditability.
+4. **Accessibility:** The platform facilitates access to funding for innovative projects that would otherwise have difficulty obtaining it.
 
-## Características y Funcionalidades
+## Features and Functionalities
 
-1. **Registro y Verificación:**
-   - Tanto los inversores como los proyectos deben registrarse y verificarse en la plataforma.
-   - Los proyectos deben presentar un plan de negocio detallado y auditable.
+1. **Registration and Verification:**
+   - Both investors and projects must register and be verified on the platform.
+   - Projects must present a detailed and auditable business plan.
 
-2. **Creación de Campañas de Financiación:**
-   - Los proyectos crean campañas estableciendo el monto a recaudar, el plazo y las condiciones.
-   - Se detalla el uso de los fondos y se presentan las garantías ofrecidas.
+2. **Creation of Funding Campaigns:**
+   - Projects create campaigns by setting the amount to be raised, the term, and the conditions.
+   - The use of funds is detailed and guarantees offered are presented.
 
-3. **Inversión:**
-   - Los inversores depositan BTC en un smart contract de la plataforma.
-   - Los fondos se bloquean hasta que se cumplan las metas de financiación o finalice el plazo.
+3. **Investment:**
+   - Investors deposit BTC into a platform smart contract.
+   - Funds are locked until funding goals are met or the term ends.
 
-4. **Desembolso de Fondos:**
-   - Una vez alcanzada la meta, los fondos se liberan al proyecto.
-   - Se crea un token representativo de la deuda que el proyecto tiene con los inversores.
+4. **Disbursement of Funds:**
+   - Once the goal is reached, funds are released to the project.
+   - A token representing the debt the project owes to investors is created.
 
-5. **Garantías y Recuperación de Inversiones:**
-   - **Tokenización de Activos:** Los proyectos tokenizan activos reales y los depositan en un contrato inteligente. En caso de incumplimiento, los inversores pueden reclamar estos activos.
-   - **Garantía Personal de los Fundadores:** Los fundadores del proyecto pueden ofrecer sus activos personales como garantía.
-   - **Pignoración de Tokens:** Los proyectos pueden pignorar otros tokens que posean como garantía.
-   - **Pools de Liquidez:** Los proyectos pueden aportar liquidez a pools de liquidez en protocolos de DeFi como garantía.
-   - **Escrow Multisig:** Los fondos pueden ser custodiados en un contrato multisig requiriendo múltiples firmas para su liberación.
+5. **Guarantees and Recovery of Investments:**
+   - **Asset Tokenization:** Projects tokenize real assets and deposit them in a smart contract. In case of default, investors can claim these assets.
+   - **Founders' Personal Guarantee:** Project founders can offer their personal assets as collateral.
+   - **Token Pledge:** Projects can pledge other tokens they own as collateral.
+   - **Liquidity Pools:** Projects can contribute liquidity to DeFi protocol liquidity pools as collateral.
+   - **Multisig Escrow:** Funds can be held in a multisig contract requiring multiple signatures for release.
 
-6. **Características Adicionales de la Plataforma:**
-   - **Sistema de Reputación:** Se implementa un sistema de reputación para evaluar la confiabilidad de los proyectos y los inversores.
-   - **Oracle:** Se utiliza un oráculo para obtener datos del mundo real y validar las garantías ofrecidas.
-   - **Interfaz Intuitiva:** La plataforma tiene una interfaz fácil de usar para facilitar la participación de todos los usuarios.
-   - **Token Nativo:** Se puede crear un token nativo para incentivar la participación en la plataforma y gobernar su funcionamiento.
+6. **Additional Platform Features:**
+   - **Reputation System:** A reputation system is implemented to assess the reliability of projects and investors.
+   - **Oracle:** An oracle is used to obtain real-world data and validate the guarantees offered.
+   - **Intuitive Interface:** The platform has an easy-to-use interface to facilitate user participation.
+   - **Native Token:** A native token can be created to incentivize platform participation and govern its operation.
 
-## Colaboradores
+## Contributors
 
 * [@Jan](https://github.com/janacostab) - Jan Acosta Becerril
 * [@Marlon](https://github.com/Champagnepagcois) - Marlon Francois Rodriguez Cejudo
 * [@Hariel](https://github.com/HarielPS) - Hariel Padilla Sanchez
-
