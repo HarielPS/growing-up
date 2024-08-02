@@ -168,7 +168,7 @@ Mostrar los proyectos disponibles para inversión con información detallada.
 
 ## Colaboradores
 
-* [@Jan](https://github.com/charlyguz) - Jan Acosta Becerril
+* [@Jan](https://github.com/janacostab) - Jan Acosta Becerril
 * [@Marlon](https://github.com/Champagnepagcois) - Marlon Francois Rodriguez Cejudo
 * [@Hariel](https://github.com/HarielPS) - Hariel Padilla Sanchez
 
