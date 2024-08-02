@@ -12,5 +12,6 @@ const CardInfoTooltip = React.forwardRef((props, ref) => {
     </Tooltip>
   );
 });
+CardInfoTooltip.displayName = 'CardInfoTooltip';
 
 export default CardInfoTooltip;

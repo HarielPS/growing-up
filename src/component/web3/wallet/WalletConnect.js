@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, List, ListItem, ListItemIcon, ListItemText, Button, Divider } from '@mui/material';
 import Web3 from 'web3';
+import Image from 'next/image';
 
 
 const wallets = [
@@ -132,7 +133,7 @@ const WalletConnect = ({ onWalletConnected }) => {
               <ListItemIcon sx={{ minWidth: '40px', textAlign: 'center'}}>
               <Box sx={{background:'white', padding:'4px', borderRadius:3
               }}>
-                  <img src={wallet.icon} alt={wallet.name} width={24} height={24}/>
+                  <Image src={wallet.icon} alt={wallet.name} width={24} height={24}/>
               </Box>
               </ListItemIcon>
               <ListItemText primary={wallet.name} />

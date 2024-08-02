@@ -9,10 +9,9 @@ import { Dialog } from "primereact/dialog";
 import { Card } from "primereact/card";
 import { Image } from "primereact/image";
 import Typography from "@mui/material/Typography";
-import { Box, width } from "@mui/system";
-import { useLocalStorage } from 'primereact/hooks';
+import { Box } from "@mui/system";
 
-export default function MaximizableDemo({ project, visible, onHide }) {
+const MaximizableDemo = ({ project, visible, onHide }) => {
   const theme = useTheme();
   const borderColor = theme.palette.mode === "dark" ? "#CFCFCF" : "#B2B2B2";
   const boxShadow =
@@ -21,18 +20,18 @@ export default function MaximizableDemo({ project, visible, onHide }) {
       : "0 4px 8px rgba(0, 0, 0, 0.2)";
   const [walletAddress, setWalletAddress] = useState('');
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(project);
-    const actualizarValor = () =>{
+    const actualizarValor = () => {
       const storedValue = localStorage.getItem('connectedWalletAddress');
       setWalletAddress(storedValue || '--');
     };
     actualizarValor();
     window.addEventListener('storage', actualizarValor);
-    return ()=>{
+    return () => {
       window.removeEventListener('storage', actualizarValor);
     };
-  },[]);
+  }, [project]);
 
   return (
     <Dialog header="Project Details" visible={visible} onHide={onHide} maximizable>
@@ -167,7 +166,6 @@ export default function MaximizableDemo({ project, visible, onHide }) {
                       style={{ width: "80%" }}
                       disabled
                       placeholder="Disabled"
-                      // percentageRaised={((project.monto_recaudado / project.monto_pedido) * 100).toFixed(2)}
                       value={`${project.monto_recaudado} / ${((project.monto_recaudado / project.monto_pedido) * 100).toFixed(1)}%`}
                     />
                   </div>
@@ -256,9 +254,13 @@ export default function MaximizableDemo({ project, visible, onHide }) {
           variant="body2"
           sx={{ fontWeight: "light", textAlign: "center", marginTop: "2vh" }}
         >
-          Al invertir, confirmas los terminos de uso de Growin-up
+          Al invertir, confirmas los términos de uso de Growing-up
         </Typography>
       </Card>
     </Dialog>
   );
-}
+};
+
+MaximizableDemo.displayName = 'MaximizableDemo';
+
+export default MaximizableDemo;
